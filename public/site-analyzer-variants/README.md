@@ -96,8 +96,42 @@ npm run dev
 ### Direct File Access
 Open any `.html` file directly in a browser:
 ```bash
+# View all variants in a hub
+open /home/dgar/lolowebdev/public/site-analyzer-variants/index.html
+
+# View single variant
 open /home/dgar/lolowebdev/public/site-analyzer-variants/VARIANT_A_LUXURY_MINIMAL.html
+
+# View real examples
+open /home/dgar/lolowebdev/public/site-analyzer-variants/examples.html
 ```
+
+---
+
+## 🏢 Real Project Examples
+
+### FATM — Federación Argentina de Tenis de Mesa
+**Archivo**: `examples.html` (hub) + `EXAMPLE_FATM_v1.html` + `EXAMPLE_FATM_v2.html`
+
+A hybrid project that combines elements from **Tech Forward** + **Luxury Minimal** variants:
+
+**ADN Mapping**:
+- ✓ **From Tech Forward**: Plus Jakarta Sans typography, vibrant celeste (#74ACDF) + gold palette, animated ticker bar, smooth scroll choreography
+- ✓ **From Luxury Minimal**: Cormorant Garamond serif headings, generous whitespace, clean visual hierarchy, refined spacing
+- ✗ **Not from Brutalist**: No massive typography, no asymmetric layouts, professional tone
+
+**Key Features**:
+- **v1**: Exploration phase with rich animations
+- **v2 (Cinematic)**: Refined direction with polished interactions and performance metrics
+- Responsive design across all devices
+- Selective animation use (not overwhelming)
+- Purpose-driven information hierarchy
+
+**Why FATM Matters**:
+- Real-world projects rarely fit a single pure ADN variant
+- Hybrid approaches combining the best elements work effectively
+- Iteration from v1 to v2 shows the actual design workflow
+- Demonstrates that restraint + refinement often outweigh quantity
 
 ---
 
@@ -118,11 +152,29 @@ open /home/dgar/lolowebdev/public/site-analyzer-variants/VARIANT_A_LUXURY_MINIMA
 
 ## 🎯 How to Use These Mockups
 
-1. **Explore All Three**: Open `index.html` to see all variants at once
-2. **Compare Directly**: View comparison table to understand differences
-3. **Pick One**: Click through to view each variant in full detail
-4. **Refine**: Choose one or mix elements from multiple variants
-5. **Implement**: Use your selected ADN as the foundation for Phases 1-4
+### Three-Step Discovery Flow
+
+**Step 1: View Theoretical Variants**
+1. Open `index.html` to see all 3 pure ADN variants at once
+2. Explore each variant's unique characteristics
+3. Compare side-by-side using the comparison table
+
+**Step 2: Explore Real Examples**
+1. Check `examples.html` to see how FATM combines elements
+2. Understand hybrid approaches and practical design decisions
+3. Learn from iteration (v1 exploration → v2 refinement)
+
+**Step 3: Make Your Selection**
+1. Pick a pure variant OR create a hybrid mix
+2. Define your ADN based on your project needs
+3. Use selected direction for Phases 1-4 implementation
+
+### Advanced: Building Hybrids
+
+You can mix elements from multiple variants:
+- **Variant A structure** + **Variant B colors** + **Variant C typography** = Custom Hybrid
+- FATM shows this works in practice
+- Use the comparison table to mix and match characteristics
 
 ---
 
