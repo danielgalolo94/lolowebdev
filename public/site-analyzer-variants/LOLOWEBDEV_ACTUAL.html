@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOLOWEBDEV — Sitio Actual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 20px 40px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    nav a {
+      margin-left: 20px;
+      color: #666;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .hero {
+      padding: 80px 40px;
+      text-align: center;
+      background: #f9f9f9;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 12px 30px;
+      background: #000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .features {
+      padding: 60px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .features h2 {
+      font-size: 32px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .feature-box {
+      padding: 20px;
+      background: #f5f5f5;
+      border-radius: 4px;
+    }
+
+    .feature-box h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .feature-box p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .phases {
+      padding: 60px 40px;
+      background: #f9f9f9;
+    }
+
+    .phases h2 {
+      font-size: 32px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .phase-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .phase {
+      padding: 20px;
+      margin-bottom: 15px;
+      background: white;
+      border-left: 4px solid #000;
+    }
+
+    .phase h3 {
+      margin-bottom: 5px;
+    }
+
+    .phase p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    footer {
+      padding: 40px;
+      text-align: center;
+      background: #000;
+      color: #fff;
+      border-top: 1px solid #333;
+    }
+
+    @media (max-width: 768px) {
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">LOLOWEBDEV</div>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#phases">Phases</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>LOLOWEBDEV v2.0</h1>
+  <p>Sistema modular para crear landing pages cinematográficas con UX intelligence y video architecture.</p>
+  <a href="#" class="cta-button">Get Started</a>
+</section>
+
+<section class="features" id="features">
+  <h2>What is LOLOWEBDEV?</h2>
+  <div class="feature-grid">
+    <div class="feature-box">
+      <h3>🎬 Video-First</h3>
+      <p>Arquitectura diseñada para video cinematográfico con canvas rendering y scroll binding.</p>
+    </div>
+    <div class="feature-box">
+      <h3>⚡ Premium Animations</h3>
+      <p>11 tipos de animaciones con GSAP, Lenis smooth scroll, y micro-interacciones.</p>
+    </div>
+    <div class="feature-box">
+      <h3>🎨 Design Tokens</h3>
+      <p>Sistema de diseño completo con paletas de color, tipografía y spacing.</p>
+    </div>
+  </div>
+</section>
+
+<section class="phases" id="phases">
+  <h2>Implementation Phases</h2>
+  <div class="phase-list">
+    <div class="phase">
+      <h3>Phase 1: Foundation</h3>
+      <p>Design tokens, Lighthouse audit, folder structure. Establish baseline performance and design system.</p>
+    </div>
+    <div class="phase">
+      <h3>Phase 2: UX Enhancements</h3>
+      <p>Responsive typography, button states, micro-interactions. Implement accessibility standards.</p>
+    </div>
+    <div class="phase">
+      <h3>Phase 3: Video Integration</h3>
+      <p>Frame extraction, Lenis + GSAP setup. Canvas rendering and animation choreography.</p>
+    </div>
+    <div class="phase">
+      <h3>Phase 4: Testing & Deployment</h3>
+      <p>Jest tests, E2E testing, Lighthouse validation. Production deployment with monitoring.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 LOLOWEBDEV. Cinematic landing pages for the modern web.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOLOWEBDEV — Variant B: Tech Forward</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0a0e27;
+      --bg-2: #1a1f3a;
+      --accent-1: #00d9ff;
+      --accent-2: #ff006e;
+      --accent-3: #ffd60a;
+      --text: #ffffff;
+      --text-dim: rgba(255, 255, 255, 0.6);
+      --border: rgba(0, 217, 255, 0.2);
+      --font-display: 'Plus Jakarta Sans', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: linear-gradient(135deg, var(--bg) 0%, var(--bg-2) 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      background: rgba(10, 14, 39, 0.8);
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      background: linear-gradient(90deg, var(--accent-1), #00f5ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav a {
+      margin-left: 2.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      transition: width 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--accent-1);
+    }
+
+    nav a:hover::before {
+      width: 100%;
+    }
+
+    .hero {
+      margin-top: 80px;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.15), transparent);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(-50%, -50%); }
+      50% { transform: translate(-45%, -45%); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 800px;
+      padding: 0 2.5rem;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-1);
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--text) 0%, var(--accent-1) 50%, var(--text) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      background: transparent;
+      border: 1.5px solid var(--accent-1);
+      color: var(--accent-1);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--accent-1);
+      z-index: -1;
+      transition: left 0.2s;
+    }
+
+    .cta-button:hover {
+      color: var(--bg);
+    }
+
+    .cta-button:hover::before {
+      left: 0;
+    }
+
+    .features {
+      padding: 8rem 2.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-1);
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 3rem;
+    }
+
+    h2 span {
+      background: linear-gradient(90deg, var(--accent-1), #00f5ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-box {
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .feature-box:hover {
+      background: rgba(0, 217, 255, 0.05);
+      border-color: rgba(0, 217, 255, 0.5);
+      transform: translateY(-8px);
+    }
+
+    .feature-box h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--accent-1);
+    }
+
+    .feature-box p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-dim);
+    }
+
+    .phases {
+      padding: 6rem 2.5rem;
+      background: rgba(0, 217, 255, 0.03);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 10;
+    }
+
+    .phase-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .phase {
+      padding: 2rem;
+    }
+
+    .phase h3 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent-1), #00f5ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .phase p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    footer {
+      padding: 3rem 2.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav a {
+        margin-left: 1rem;
+      }
+
+      .hero {
+        height: 60vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">⚡ LOLOWEBDEV</div>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#phases">Phases</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Next Generation Tech</div>
+    <h1>Transforming Ideas Into <span>Digital Reality</span></h1>
+    <p>Sistema modular de última generación para crear landing pages cinematográficas con arquitectura de video, animaciones premium y UX intelligence.</p>
+    <a href="#" class="cta-button">Explore Features</a>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="section-container">
+    <div class="section-eyebrow">Why LOLOWEBDEV</div>
+    <h2>Cutting-Edge <span>Capabilities</span></h2>
+
+    <div class="feature-grid">
+      <div class="feature-box">
+        <h3>⚡ Video Architecture</h3>
+        <p>Canvas rendering con frame binding. Smooth scroll cinematográfico con GSAP + ScrollTrigger. Optimización para web con WebM + H.264.</p>
+      </div>
+
+      <div class="feature-box">
+        <h3>🎯 Premium Animations</h3>
+        <p>11 tipos de animaciones con validador de variedad. Lenis smooth scroll personalizado. Micro-interacciones cuidadosamente orquestadas.</p>
+      </div>
+
+      <div class="feature-box">
+        <h3>🎨 Design Tokens</h3>
+        <p>Sistema de diseño completo con TypeScript. Paletas por dominio (SaaS, Agency, Startup, E-commerce). Tipografía dinámica con clamp().</p>
+      </div>
+
+      <div class="feature-box">
+        <h3>📊 Performance First</h3>
+        <p>Lighthouse 98+ guaranteed. Core Web Vitals monitoring. A/B testing con feature flags. Real-time analytics integration.</p>
+      </div>
+
+      <div class="feature-box">
+        <h3>🔐 Production Ready</h3>
+        <p>Jest + React Testing Library. Playwright E2E testing. Sentry error tracking. Vercel deployment con caching headers.</p>
+      </div>
+
+      <div class="feature-box">
+        <h3>♿ Accessibility First</h3>
+        <p>WCAG AAA compliance. Semantic HTML + ARIA labels. Focus rings + reduced-motion detection. Screen reader optimized.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="phases" id="phases">
+  <div class="section-container">
+    <h2>Implementation Phases</h2>
+    <div class="phase-list">
+      <div class="phase">
+        <h3>01</h3>
+        <p>Foundation</p>
+      </div>
+      <div class="phase">
+        <h3>02</h3>
+        <p>UX Enhancements</p>
+      </div>
+      <div class="phase">
+        <h3>03</h3>
+        <p>Video Integration</p>
+      </div>
+      <div class="phase">
+        <h3>04</h3>
+        <p>Testing & Deploy</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 LOLOWEBDEV v2.0. Built for the future. Performance meets elegance.</p>
+</footer>
+
+</body>
+</html>

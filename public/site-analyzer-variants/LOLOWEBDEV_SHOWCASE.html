@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOLOWEBDEV — Before & After ADN Variants</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0f0f0f;
+      --bg-light: #1a1a1a;
+      --accent-cyan: #00d9ff;
+      --accent-magenta: #ff006e;
+      --accent-gold: #ffd60a;
+      --text: #ffffff;
+      --text-dim: rgba(255, 255, 255, 0.6);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg) 0%, var(--bg-light) 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 2rem 2.5rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+      background: rgba(10, 14, 39, 0.8);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      padding: 3rem 2.5rem 1rem;
+      max-width: 1400px;
+      margin: 2rem auto 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .section-title span {
+      color: var(--accent-cyan);
+    }
+
+    .variants-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      padding: 2.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .variant-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(0, 217, 255, 0.2);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .variant-card:hover {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+      transform: translateY(-4px);
+    }
+
+    .variant-thumbnail {
+      width: 100%;
+      height: 400px;
+      background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-weight: 700;
+      color: rgba(0, 217, 255, 0.2);
+      position: relative;
+    }
+
+    .variant-info {
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .variant-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .variant-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .variant-description {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .variant-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-tag {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      background: rgba(0, 217, 255, 0.1);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      border-radius: 4px;
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .feature-tag.gold {
+      background: rgba(255, 214, 10, 0.1);
+      border-color: rgba(255, 214, 10, 0.3);
+      color: var(--accent-gold);
+    }
+
+    .feature-tag.magenta {
+      background: rgba(255, 0, 110, 0.1);
+      border-color: rgba(255, 0, 110, 0.3);
+      color: var(--accent-magenta);
+    }
+
+    .view-button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      border: 1.5px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+
+    .view-button:hover {
+      background: var(--accent-cyan);
+      color: var(--bg);
+    }
+
+    .comparison-section {
+      padding: 3rem 2.5rem;
+      max-width: 1400px;
+      margin: 3rem auto;
+      background: rgba(0, 217, 255, 0.05);
+      border: 1px solid rgba(0, 217, 255, 0.2);
+      border-radius: 8px;
+    }
+
+    .comparison-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .comparison-title span {
+      color: var(--accent-cyan);
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .comparison-item {
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 3px solid var(--accent-cyan);
+      border-radius: 4px;
+    }
+
+    .comparison-label {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .comparison-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    footer {
+      padding: 3rem 2.5rem;
+      text-align: center;
+      border-top: 1px solid rgba(0, 217, 255, 0.2);
+      background: rgba(10, 14, 39, 0.8);
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-top: 4rem;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-button {
+      padding: 0.6rem 1.2rem;
+      background: rgba(0, 217, 255, 0.1);
+      border: 1px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+
+    .nav-button:hover {
+      background: var(--accent-cyan);
+      color: var(--bg);
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .variants-grid {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+      }
+
+      .section-title {
+        font-size: 1.3rem;
+        padding: 2rem 1.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>⚡ LOLOWEBDEV</h1>
+  <p class="subtitle">Before & After — 3 ADN Variants Showcase</p>
+</header>
+
+<div class="container">
+  <div class="section-title">Current <span>Version</span></div>
+
+  <div class="variants-grid">
+    <div class="variant-card">
+      <div class="variant-thumbnail">
+        <span>ACTUAL</span>
+      </div>
+      <div class="variant-info">
+        <div class="variant-title">LOLOWEBDEV — Actual</div>
+        <div class="variant-subtitle">Current Baseline</div>
+        <div class="variant-description">
+          Simple, clean design with Inter typography, flat colors, and minimal styling. Serves as the baseline for our ADN variants.
+        </div>
+        <div class="variant-features">
+          <span class="feature-tag">Minimal</span>
+          <span class="feature-tag">Fast</span>
+          <span class="feature-tag">Baseline</span>
+        </div>
+        <a href="LOLOWEBDEV_ACTUAL.html" class="view-button">View Full Site →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Redesigned <span>Variants</span></div>
+
+  <div class="variants-grid">
+    <div class="variant-card">
+      <div class="variant-thumbnail" style="background: linear-gradient(135deg, #F5F3F0 0%, #E8E4DC 100%); color: #1a1a1a;">
+        <span style="text-align: center;">LUXURY<br/>MINIMAL</span>
+      </div>
+      <div class="variant-info">
+        <div class="variant-title">Luxury Minimal</div>
+        <div class="variant-subtitle">Refined & Elegant</div>
+        <div class="variant-description">
+          Cormorant Garamond serif headings, gold accents with black and cream palette. Subtle animations, elegant spacing, premium typography.
+        </div>
+        <div class="variant-features">
+          <span class="feature-tag gold">Serif</span>
+          <span class="feature-tag gold">Elegant</span>
+          <span class="feature-tag gold">Subtle</span>
+        </div>
+        <a href="LOLOWEBDEV_VARIANT_A.html" class="view-button">View Full Site →</a>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <div class="variant-thumbnail" style="background: linear-gradient(135deg, #00D9FF 0%, #FF006E 100%);"></div>
+      <div class="variant-info">
+        <div class="variant-title">Tech Forward</div>
+        <div class="variant-subtitle">Dynamic & Vibrant</div>
+        <div class="variant-description">
+          Plus Jakarta Sans bold typography, vibrant gradient colors (cyan, magenta, gold). Glassmorphic navbar, 11+ premium animations.
+        </div>
+        <div class="variant-features">
+          <span class="feature-tag">Gradient</span>
+          <span class="feature-tag">Premium</span>
+          <span class="feature-tag">Modern</span>
+        </div>
+        <a href="LOLOWEBDEV_VARIANT_B.html" class="view-button">View Full Site →</a>
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <div class="variant-thumbnail" style="background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); font-size: 2rem;">
+        <span style="text-align: center;">BRUTALIST<br/>BOLD</span>
+      </div>
+      <div class="variant-info">
+        <div class="variant-title">Brutalist Bold</div>
+        <div class="variant-subtitle">Provocative & Bold</div>
+        <div class="variant-description">
+          Outfit bold typography, black & white with magenta accent. Experimental animations (clip-path, skew), massive 9rem+ hero, asymmetric layouts.
+        </div>
+        <div class="variant-features">
+          <span class="feature-tag magenta">Monospace</span>
+          <span class="feature-tag magenta">Experimental</span>
+          <span class="feature-tag magenta">Statement</span>
+        </div>
+        <a href="LOLOWEBDEV_VARIANT_C.html" class="view-button">View Full Site →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="comparison-section">
+    <div class="comparison-title">Design <span>Comparison</span></div>
+    <div class="comparison-grid">
+      <div class="comparison-item">
+        <div class="comparison-label">Actual</div>
+        <div class="comparison-value">Inter / Minimal</div>
+      </div>
+      <div class="comparison-item">
+        <div class="comparison-label">Variant A (Luxury)</div>
+        <div class="comparison-value">Cormorant / Gold</div>
+      </div>
+      <div class="comparison-item">
+        <div class="comparison-label">Variant B (Tech)</div>
+        <div class="comparison-value">Plus Jakarta / Gradient</div>
+      </div>
+      <div class="comparison-item">
+        <div class="comparison-label">Variant C (Brutalist)</div>
+        <div class="comparison-value">Outfit / Magenta</div>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <a href="index.html" class="nav-button">← ADN Variants Hub</a>
+      <a href="/site-analyzer-variants/index.html" class="nav-button">All Mockups →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 LOLOWEBDEV Site Analyzer. Three distinct design directions for your digital future.</p>
+  <p style="margin-top: 1rem; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;">BEFORE & AFTER SHOWCASE</p>
+</footer>
+
+</body>
+</html>

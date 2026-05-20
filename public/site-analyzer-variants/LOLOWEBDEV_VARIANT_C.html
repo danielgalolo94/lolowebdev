@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOLOWEBDEV — Variant C: Brutalist Bold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --black: #000000;
+      --white: #ffffff;
+      --accent: #FF006E;
+      --gray: #1a1a1a;
+      --font-display: 'Outfit', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-display);
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: var(--black);
+      color: var(--white);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent 45%, var(--accent) 45%, var(--accent) 55%, transparent 55%);
+      opacity: 0.05;
+      transform: rotate(0deg);
+      animation: shift 20s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes shift {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 100%;
+      padding: 0 2rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 12vw, 9rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      animation: revealClip 0.8s ease-out;
+    }
+
+    @keyframes revealClip {
+      0% {
+        clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+        opacity: 0;
+      }
+      100% {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        opacity: 1;
+      }
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+      display: block;
+      font-weight: 900;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--accent);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 2px solid var(--accent);
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--white);
+      z-index: -1;
+      transition: left 0.2s;
+    }
+
+    .cta-button:hover {
+      color: var(--accent);
+      transform: skewX(-5deg);
+    }
+
+    .cta-button:hover::before {
+      left: 0;
+    }
+
+    .manifesto {
+      padding: 8rem 2rem;
+      background: var(--white);
+      position: relative;
+      z-index: 10;
+    }
+
+    .manifesto::before {
+      content: '01';
+      position: absolute;
+      top: -2rem;
+      left: 2rem;
+      font-size: clamp(6rem, 15vw, 12rem);
+      font-weight: 900;
+      color: rgba(0, 0, 0, 0.03);
+      letter-spacing: -0.05em;
+      line-height: 1;
+    }
+
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .manifesto h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .manifesto h2 span {
+      color: var(--accent);
+      display: block;
+      border-bottom: 4px solid var(--accent);
+      padding-bottom: 0.5rem;
+      width: fit-content;
+    }
+
+    .manifesto p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 800px;
+      margin-bottom: 1.5rem;
+      color: rgba(0, 0, 0, 0.8);
+    }
+
+    .features {
+      padding: 8rem 2rem;
+      background: var(--black);
+      color: var(--white);
+      position: relative;
+      z-index: 10;
+    }
+
+    .features::before {
+      content: '02';
+      position: absolute;
+      top: -2rem;
+      right: 2rem;
+      font-size: clamp(6rem, 15vw, 12rem);
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.03);
+      letter-spacing: -0.05em;
+      line-height: 1;
+    }
+
+    .features h2 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      letter-spacing: -0.02em;
+    }
+
+    .features h2 span {
+      color: var(--accent);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+    }
+
+    .feature-box {
+      padding: 2.5rem;
+      border: 3px solid var(--accent);
+      background: transparent;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-box::before {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--accent);
+      z-index: -1;
+      transition: top 0.2s;
+    }
+
+    .feature-box:hover {
+      color: var(--black);
+      transform: rotate(-1deg) skewY(-1deg);
+    }
+
+    .feature-box:hover::before {
+      top: 0;
+    }
+
+    .feature-box h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .feature-box p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .phases {
+      padding: 8rem 2rem;
+      background: var(--white);
+      position: relative;
+      z-index: 10;
+    }
+
+    .phases::before {
+      content: '03';
+      position: absolute;
+      top: -2rem;
+      left: 2rem;
+      font-size: clamp(6rem, 15vw, 12rem);
+      font-weight: 900;
+      color: rgba(0, 0, 0, 0.03);
+      letter-spacing: -0.05em;
+      line-height: 1;
+    }
+
+    .phases h2 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      letter-spacing: -0.02em;
+    }
+
+    .phases h2 span {
+      color: var(--accent);
+      border-bottom: 4px solid var(--accent);
+      padding-bottom: 0.25rem;
+    }
+
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .phase {
+      padding: 2rem;
+      border: 2px solid var(--black);
+      background: var(--white);
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .phase::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      background: var(--accent);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .phase:hover {
+      transform: translateX(8px) translateY(-8px);
+    }
+
+    .phase:hover::before {
+      opacity: 1;
+    }
+
+    .phase h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+
+    .phase p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(0, 0, 0, 0.7);
+    }
+
+    footer {
+      padding: 3rem 2rem;
+      background: var(--black);
+      color: var(--white);
+      text-align: center;
+      font-size: 0.9rem;
+      border-top: 3px solid var(--accent);
+      position: relative;
+      z-index: 10;
+      letter-spacing: 0.05em;
+    }
+
+    footer p {
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: clamp(2.5rem, 8vw, 5rem);
+      }
+
+      .manifesto::before,
+      .features::before,
+      .phases::before {
+        font-size: clamp(3rem, 10vw, 6rem);
+      }
+
+      .phase {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>LOLOWEBDEV <span>v2.0</span></h1>
+    <p>Sistema modular para crear landing pages cinematográficas con UX intelligence y video architecture.</p>
+    <a href="#" class="cta-button">Explore Now</a>
+  </div>
+</section>
+
+<section class="manifesto">
+  <div class="section-container">
+    <h2>What is <span>LOLOWEBDEV</span></h2>
+    <p>A brutally honest system for cinematic digital experiences. No compromise. No fluff. Pure technical excellence paired with uncompromising design.</p>
+    <p>We build the future. Not following trends. Creating them.</p>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="section-container">
+    <h2>Core <span>Capabilities</span></h2>
+    <div class="feature-grid">
+      <div class="feature-box">
+        <h3>🎬 Video Architecture</h3>
+        <p>Canvas rendering con frame binding. Smooth scroll cinematográfico con GSAP + ScrollTrigger. Optimización para web con WebM + H.264.</p>
+      </div>
+      <div class="feature-box">
+        <h3>⚡ Premium Animations</h3>
+        <p>11 tipos de animaciones con validador de variedad. Lenis smooth scroll personalizado. Micro-interacciones cuidadosamente orquestadas.</p>
+      </div>
+      <div class="feature-box">
+        <h3>🎨 Design Tokens</h3>
+        <p>Sistema de diseño completo con TypeScript. Paletas por dominio (SaaS, Agency, Startup, E-commerce). Tipografía dinámica con clamp().</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="phases" id="phases">
+  <div class="section-container">
+    <h2>Implementation <span>Phases</span></h2>
+    <div class="phase-grid">
+      <div class="phase">
+        <h3>Phase 01</h3>
+        <p>Foundation. Design tokens, Lighthouse audit, estructura de carpetas. Establecer baseline de performance y sistema de diseño.</p>
+      </div>
+      <div class="phase">
+        <h3>Phase 02</h3>
+        <p>UX Enhancements. Tipografía responsiva, button states, micro-interacciones. Implementar estándares de accesibilidad WCAG AAA.</p>
+      </div>
+      <div class="phase">
+        <h3>Phase 03</h3>
+        <p>Video Integration. Canvas rendering con frame binding. Lenis smooth scroll + GSAP choreography. Optimización de video para web.</p>
+      </div>
+      <div class="phase">
+        <h3>Phase 04</h3>
+        <p>Testing & Deployment. Jest testing, E2E validation con Playwright. Lighthouse 98+, Core Web Vitals monitoring, production deployment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 LOLOWEBDEV. Uncompromising digital excellence. Built for the brave.</p>
+</footer>
+
+</body>
+</html>
