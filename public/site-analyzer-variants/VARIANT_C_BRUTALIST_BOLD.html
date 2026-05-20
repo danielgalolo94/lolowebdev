@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VARIANT C — Brutalist Bold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black: #000000;
+      --white: #FFFFFF;
+      --accent: #FF006E;
+      --light-gray: #f5f5f5;
+      --font-display: 'Outfit', sans-serif;
+      --transition: 150ms ease-out;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-display);
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.2;
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 12px; }
+    ::-webkit-scrollbar-track { background: var(--white); }
+    ::-webkit-scrollbar-thumb { background: var(--black); border-radius: 0; }
+
+    /* ANIMATIONS */
+    @keyframes clipPathReveal {
+      from {
+        clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+      }
+      to {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      }
+    }
+
+    @keyframes rotateIn {
+      from {
+        opacity: 0;
+        transform: rotate(-3deg);
+      }
+      to {
+        opacity: 1;
+        transform: rotate(0deg);
+      }
+    }
+
+    @keyframes jumpIn {
+      0% {
+        opacity: 0;
+        transform: translateY(40px) scaleY(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+      }
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--white);
+      border-bottom: 3px solid var(--black);
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+
+    .logo:hover {
+      color: var(--accent);
+      transform: skewX(-5deg);
+    }
+
+    .nav-cta {
+      padding: 0.6rem 1.5rem;
+      background: var(--black);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent);
+      color: var(--white);
+      transform: scale(1.05);
+    }
+
+    /* HERO */
+    .hero {
+      margin-top: 80px;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      padding: 0 2.5rem;
+      width: 100%;
+      animation: jumpIn 0.8s var(--transition);
+    }
+
+    .hero-h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 12vw, 9rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 1rem;
+      animation: clipPathReveal 0.8s var(--transition);
+    }
+
+    .hero-h1 em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 900;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--black);
+      max-width: 500px;
+      margin-bottom: 2rem;
+      animation: jumpIn 0.8s var(--transition) 0.1s backwards;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: var(--black);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all var(--transition);
+      animation: jumpIn 0.8s var(--transition) 0.2s backwards;
+      border: 3px solid var(--black);
+    }
+
+    .hero-cta:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: skewX(-3deg) scale(1.02);
+    }
+
+    /* MANIFESTO */
+    .manifesto {
+      padding: 8rem 2.5rem;
+      background: var(--black);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .manifesto::before {
+      content: '01';
+      position: absolute;
+      font-size: clamp(12rem, 30vw, 25rem);
+      font-weight: 900;
+      opacity: 0.03;
+      top: 50%;
+      right: -5%;
+      transform: translateY(-50%);
+      line-height: 1;
+    }
+
+    .manifesto-content {
+      max-width: 900px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .manifesto-label {
+      font-size: 0.8rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .manifesto-h2 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      color: var(--white);
+    }
+
+    .manifesto-text {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      line-height: 1.5;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* PROJECTS */
+    .projects {
+      padding: 8rem 2.5rem;
+      background: var(--white);
+      position: relative;
+    }
+
+    .projects::before {
+      content: '02';
+      position: absolute;
+      font-size: clamp(12rem, 30vw, 25rem);
+      font-weight: 900;
+      opacity: 0.03;
+      top: 50%;
+      left: -5%;
+      transform: translateY(-50%);
+      line-height: 1;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      margin-bottom: 4rem;
+      color: var(--black);
+    }
+
+    .projects-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .project-item {
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, var(--accent) 0%, rgba(255, 0, 110, 0.3) 100%);
+      border: 3px solid var(--black);
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all var(--transition);
+      animation: rotateIn 0.6s var(--transition);
+    }
+
+    .project-item:nth-child(1) {
+      grid-column: span 1;
+      grid-row: span 2;
+      animation-delay: 0s;
+    }
+
+    .project-item:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .project-item:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+
+    .project-item:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+
+    .project-item:hover {
+      transform: scale(0.98) rotate(-2deg);
+      border-color: var(--accent);
+    }
+
+    .project-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--black);
+      opacity: 0;
+      transition: opacity var(--transition);
+      z-index: -1;
+    }
+
+    .project-item:hover::before {
+      opacity: 0.3;
+    }
+
+    .project-label {
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (max-width: 768px) {
+      .project-item:nth-child(1) {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+    }
+
+    /* PROCESS */
+    .process {
+      padding: 8rem 2.5rem;
+      background: var(--light-gray);
+      position: relative;
+    }
+
+    .process::before {
+      content: '03';
+      position: absolute;
+      font-size: clamp(12rem, 30vw, 25rem);
+      font-weight: 900;
+      opacity: 0.03;
+      top: 50%;
+      right: -5%;
+      transform: translateY(-50%);
+      line-height: 1;
+    }
+
+    .process-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .process-step {
+      border-left: 4px solid var(--black);
+      padding-left: 2rem;
+      animation: jumpIn 0.6s var(--transition);
+    }
+
+    .process-step:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .process-step:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+
+    .process-step:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+
+    .process-step h4 {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .process-step p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--black);
+    }
+
+    /* CONTACT */
+    .contact {
+      padding: 8rem 2.5rem;
+      background: var(--black);
+      color: var(--white);
+      text-align: center;
+      position: relative;
+    }
+
+    .contact h2 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+      line-height: 1.1;
+    }
+
+    .contact h2 em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .contact p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .contact-cta {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--accent);
+      color: var(--black);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all var(--transition);
+      border: 3px solid var(--accent);
+    }
+
+    .contact-cta:hover {
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+      transform: skewX(-3deg) scale(1.02);
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 2rem 2.5rem;
+      background: var(--black);
+      border-top: 3px solid var(--accent);
+      text-align: center;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 1rem 1.5rem;
+      }
+      .hero {
+        margin-top: 70px;
+        height: 60vh;
+      }
+      .manifesto,
+      .projects,
+      .process,
+      .contact {
+        padding: 4rem 1.5rem;
+      }
+      .hero-h1 {
+        font-size: clamp(2rem, 8vw, 4rem);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="#" class="logo">BRUTALIST</a>
+  <a href="#contact" class="nav-cta">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-h1">Uncompromising <em>Design</em><br/>That Challenges</h1>
+    <p class="hero-subtitle">Bold, provocative, unapologetically original. We don't follow trends. We set them.</p>
+    <a href="#projects" class="hero-cta">View Our Work</a>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="manifesto-content">
+    <span class="manifesto-label">Our Philosophy</span>
+    <h2 class="manifesto-h2">Form Follows Conviction</h2>
+    <p class="manifesto-text">
+      Design isn't about decoration. It's about making a statement. Every line, every element, every decision exists for a reason. We believe in stripping away the unnecessary, in cutting through the noise, in creating work that demands attention and sparks conversation. This is design with a point of view.
+    </p>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <span class="section-label">Portfolio</span>
+  <h2 class="section-title">Selected Work</h2>
+
+  <div class="projects-grid">
+    <div class="project-item">
+      <span class="project-label">Project Alpha</span>
+    </div>
+    <div class="project-item">
+      <span class="project-label">Experiment Beta</span>
+    </div>
+    <div class="project-item">
+      <span class="project-label">Study Gamma</span>
+    </div>
+    <div class="project-item">
+      <span class="project-label">Initiative Delta</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="process-content">
+    <span class="section-label">Methodology</span>
+    <h2 class="section-title">How We Work</h2>
+
+    <div class="process-steps">
+      <div class="process-step">
+        <h4>01. Research</h4>
+        <p>Deep dive into context, constraints, and contradictions. Understanding the raw material before creation.</p>
+      </div>
+      <div class="process-step">
+        <h4>02. Concept</h4>
+        <p>Distillation of insights into a singular, uncompromising concept. The core idea that drives everything.</p>
+      </div>
+      <div class="process-step">
+        <h4>03. Execution</h4>
+        <p>Bringing concept to life with meticulous attention to detail. Every pixel intentional. No exceptions.</p>
+      </div>
+      <div class="process-step">
+        <h4>04. Iteration</h4>
+        <p>Refinement through critique and rigorous testing. Pushing further until it's undeniably right.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2>Ready to Make a <em>Statement?</em></h2>
+  <p>Let's create something that challenges convention and captivates audiences. Work with us to build something truly original.</p>
+  <a href="mailto:hello@brutalist.com" class="contact-cta">Start a Project</a>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2026 BRUTALIST STUDIO. Designed without compromise.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VARIANT B — Tech Forward</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0e27;
+      --bg-2: #1a1f3a;
+      --accent-1: #00d9ff;
+      --accent-2: #ff006e;
+      --accent-3: #ffd60a;
+      --accent-4: #00f5ff;
+      --text: #ffffff;
+      --text-dim: rgba(255, 255, 255, 0.6);
+      --border: rgba(0, 217, 255, 0.2);
+      --font-display: 'Plus Jakarta Sans', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: linear-gradient(135deg, var(--bg) 0%, var(--bg-2) 100%);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(0, 217, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255, 0, 110, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--accent-1), var(--accent-2)); border-radius: 6px; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { text-shadow: 0 0 20px rgba(0, 217, 255, 0.4); }
+      50% { text-shadow: 0 0 30px rgba(0, 217, 255, 0.7); }
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes borderGlow {
+      0%, 100% { border-color: rgba(0, 217, 255, 0.2); box-shadow: 0 0 0px rgba(0, 217, 255, 0); }
+      50% { border-color: rgba(0, 217, 255, 0.6); box-shadow: 0 0 20px rgba(0, 217, 255, 0.3); }
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      background: rgba(10, 14, 39, 0.8);
+      animation: fadeDown 0.6s var(--transition);
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-4));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo::before {
+      content: '⚡';
+      font-size: 1.1rem;
+      margin-right: 0.25rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all var(--transition);
+      position: relative;
+    }
+
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-1);
+    }
+
+    .nav-links a:hover::before {
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
+
+    /* HERO */
+    .hero {
+      margin-top: 80px;
+      height: 90vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.15), transparent);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(-50%, -50%); }
+      50% { transform: translate(-45%, -45%); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 800px;
+      padding: 0 2.5rem;
+      text-align: center;
+      animation: fadeUp 0.8s var(--transition);
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-1);
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      animation: slideInRight 0.6s var(--transition);
+    }
+
+    .hero-h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--text) 0%, var(--accent-4) 50%, var(--text) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeUp 0.8s var(--transition) 0.1s backwards;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      animation: fadeUp 0.8s var(--transition) 0.2s backwards;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s var(--transition) 0.3s backwards;
+    }
+
+    .hero-cta {
+      padding: 0.85rem 2rem;
+      background: transparent;
+      border: 1.5px solid var(--accent-1);
+      color: var(--accent-1);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--accent-1);
+      z-index: -1;
+      transition: left var(--transition);
+    }
+
+    .hero-cta:hover {
+      color: var(--bg);
+    }
+
+    .hero-cta:hover::before {
+      left: 0;
+    }
+
+    .hero-cta.primary {
+      background: var(--accent-1);
+      border-color: var(--accent-1);
+      color: var(--bg);
+    }
+
+    .hero-cta.primary::before {
+      background: transparent;
+    }
+
+    .hero-cta.primary:hover {
+      background: var(--accent-4);
+      border-color: var(--accent-4);
+    }
+
+    /* FEATURES */
+    .features {
+      padding: 8rem 2.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .section-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-1);
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 3rem;
+      color: var(--text);
+    }
+
+    .section-title span {
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-4));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .features-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all var(--transition);
+      animation: fadeUp 0.8s var(--transition);
+    }
+
+    .feature-card:hover {
+      background: rgba(0, 217, 255, 0.05);
+      border-color: rgba(0, 217, 255, 0.5);
+      transform: translateY(-8px);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--accent-1);
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-dim);
+    }
+
+    /* STATS */
+    .stats {
+      padding: 6rem 2.5rem;
+      background: rgba(0, 217, 255, 0.03);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 10;
+    }
+
+    .stats-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-item h4 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-4));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-item p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      padding: 8rem 2.5rem;
+      position: relative;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .cta-content h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .cta-content p {
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      color: var(--bg);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      transition: all var(--transition);
+      box-shadow: 0 8px 24px rgba(0, 217, 255, 0.2);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 217, 255, 0.4);
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 3rem 2.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      position: relative;
+      z-index: 10;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 1rem 1.5rem;
+      }
+      .hero {
+        margin-top: 70px;
+        height: 60vh;
+      }
+      .features,
+      .stats,
+      .cta-section {
+        padding: 4rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">TechForward</div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#stats">Impact</a></li>
+    <li><a href="#cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Next Generation Tech</div>
+    <h1 class="hero-h1">Transforming Ideas Into <span>Reality</span></h1>
+    <p class="hero-subtitle">We build cutting-edge digital solutions that push boundaries and drive innovation forward with unprecedented speed.</p>
+    <div class="hero-ctas">
+      <a href="#features" class="hero-cta primary">Explore Features</a>
+      <a href="#cta" class="hero-cta">Get Started</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-eyebrow">Why Choose Us</div>
+  <h2 class="section-title">Cutting-Edge <span>Capabilities</span></h2>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3>Lightning Fast</h3>
+      <p>Built for speed with optimized performance metrics that leave competitors in the dust. Experience blazing-fast load times.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <h3>Precision Targeted</h3>
+      <p>Advanced algorithms deliver exactly what you need. Every feature engineered for maximum impact and conversion.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🔐</div>
+      <h3>Security First</h3>
+      <p>Enterprise-grade security with cutting-edge encryption. Your data is protected by industry-leading safeguards.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Data Driven</h3>
+      <p>Real-time analytics and insights. Make informed decisions with our comprehensive analytics dashboard.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <h3>AI Powered</h3>
+      <p>Machine learning integration for intelligent automation. Let AI handle the heavy lifting while you focus on growth.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🌐</div>
+      <h3>Global Scale</h3>
+      <p>Deploy globally with local performance. Our infrastructure spans the world for optimal user experience everywhere.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats" id="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <h4>10M+</h4>
+      <p>Active Users</p>
+    </div>
+    <div class="stat-item">
+      <h4>99.99%</h4>
+      <p>Uptime Guaranteed</p>
+    </div>
+    <div class="stat-item">
+      <h4>500%</h4>
+      <p>Performance Gain</p>
+    </div>
+    <div class="stat-item">
+      <h4>24/7</h4>
+      <p>Expert Support</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section" id="cta">
+  <div class="cta-content">
+    <h2>Ready to Transform Your Business?</h2>
+    <p>Join thousands of companies already using our platform to accelerate growth and innovation.</p>
+    <a href="#" class="cta-button">Start Your Journey</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>&copy; 2026 TechForward. Built for the future. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

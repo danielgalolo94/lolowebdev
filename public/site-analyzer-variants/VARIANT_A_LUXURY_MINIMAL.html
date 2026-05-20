@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VARIANT A — Luxury Minimal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #D4A574;
+      --accent: #1a1a1a;
+      --surface: #F5F3F0;
+      --text: #2a2a2a;
+      --text-light: rgba(42, 42, 42, 0.7);
+      --border: rgba(212, 165, 116, 0.2);
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-body: 'Inter', sans-serif;
+      --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--surface);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--surface); }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(245, 243, 240, 0.95);
+      backdrop-filter: blur(4px);
+      border-bottom: 1px solid var(--border);
+      animation: fadeDown var(--transition);
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--accent);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .logo:hover {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color var(--transition);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--primary);
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
+
+    /* HERO */
+    .hero {
+      margin-top: 100px;
+      height: 80vh;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(212, 165, 116, 0.05) 100%);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      padding: 0 2.5rem;
+      text-align: center;
+      animation: fadeUp var(--transition);
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp var(--transition) 0.1s forwards;
+    }
+
+    .hero-h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+      opacity: 0;
+      animation: fadeUp var(--transition) 0.2s forwards;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      opacity: 0;
+      animation: fadeUp var(--transition) 0.3s forwards;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--accent);
+      color: var(--surface);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      border: 1px solid var(--accent);
+      transition: all var(--transition);
+      opacity: 0;
+      animation: fadeUp var(--transition) 0.4s forwards;
+    }
+
+    .hero-cta:hover {
+      background: var(--surface);
+      color: var(--accent);
+    }
+
+    /* FEATURED WORK */
+    .featured {
+      padding: 6rem 2.5rem;
+      background: white;
+    }
+
+    .section-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 3rem;
+      color: var(--accent);
+    }
+
+    .work-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      gap: 3rem;
+    }
+
+    .work-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .work-item:nth-child(even) {
+      direction: rtl;
+    }
+
+    .work-item:nth-child(even) > * {
+      direction: ltr;
+    }
+
+    .work-image {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--primary) 0%, rgba(212, 165, 116, 0.3) 100%);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--surface);
+      font-size: 3rem;
+      font-family: var(--font-serif);
+      font-weight: 600;
+    }
+
+    .work-content h3 {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .work-content p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .work-item {
+        grid-template-columns: 1fr;
+      }
+      .work-item:nth-child(even) {
+        direction: ltr;
+      }
+    }
+
+    /* PHILOSOPHY */
+    .philosophy {
+      padding: 6rem 2.5rem;
+      background: var(--accent);
+      color: var(--surface);
+    }
+
+    .philosophy .section-title {
+      color: var(--surface);
+      margin-bottom: 2rem;
+    }
+
+    .philosophy-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .philosophy-text {
+      font-family: var(--font-serif);
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 400;
+      line-height: 1.8;
+      font-style: italic;
+      color: rgba(245, 243, 240, 0.9);
+    }
+
+    /* TESTIMONIALS */
+    .testimonials {
+      padding: 6rem 2.5rem;
+      background: white;
+    }
+
+    .testimonials .section-title {
+      margin-bottom: 3rem;
+    }
+
+    .testimonials-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .testimonial {
+      padding: 2.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+    }
+
+    .testimonial-text {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      font-family: var(--font-serif);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .testimonial-role {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-top: 0.25rem;
+    }
+
+    /* CONTACT */
+    .contact {
+      padding: 6rem 2.5rem;
+      background: var(--accent);
+      color: var(--surface);
+      text-align: center;
+    }
+
+    .contact .section-title {
+      color: var(--surface);
+      margin-bottom: 2rem;
+    }
+
+    .contact-form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: rgba(245, 243, 240, 0.8);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: rgba(245, 243, 240, 0.1);
+      border: 1px solid rgba(245, 243, 240, 0.2);
+      color: var(--surface);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      border-radius: 2px;
+      transition: all var(--transition);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(245, 243, 240, 0.4);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      background: rgba(245, 243, 240, 0.15);
+      border-color: var(--primary);
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 0.85rem;
+      background: var(--primary);
+      color: var(--accent);
+      border: none;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all var(--transition);
+      border-radius: 2px;
+    }
+
+    .form-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 3rem 2.5rem;
+      background: rgba(26, 26, 26, 0.95);
+      color: var(--surface);
+      text-align: center;
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* UTILITIES */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 1.5rem 1.5rem;
+      }
+      .hero {
+        height: 60vh;
+        margin-top: 80px;
+      }
+      .featured,
+      .testimonials,
+      .philosophy,
+      .contact {
+        padding: 4rem 1.5rem;
+      }
+      .section-title {
+        margin-bottom: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="#" class="logo">Luxury</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">✦ Elegant Design Studio ✦</div>
+    <h1 class="hero-h1">Refined Creative Excellence</h1>
+    <p class="hero-subtitle">We craft premium digital experiences with meticulous attention to detail and timeless elegance.</p>
+    <a href="#work" class="hero-cta">Explore Our Work</a>
+  </div>
+</section>
+
+<!-- FEATURED WORK -->
+<section class="featured" id="work">
+  <div class="container">
+    <div class="section-eyebrow">Our Collection</div>
+    <h2 class="section-title">Featured Projects</h2>
+
+    <div class="work-grid">
+      <div class="work-item">
+        <div class="work-image">Project 01</div>
+        <div class="work-content">
+          <h3>The Prestige Brand</h3>
+          <p>A comprehensive brand refresh for a luxury lifestyle company, featuring sophisticated visual identity and premium digital presence that resonates with discerning audiences.</p>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-image">Project 02</div>
+        <div class="work-content">
+          <h3>Elevated Experience</h3>
+          <p>Digital transformation of a high-end retail experience, combining refined aesthetics with seamless user experience to create memorable interactions.</p>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-image">Project 03</div>
+        <div class="work-content">
+          <h3>Modern Heritage</h3>
+          <p>Bridging tradition and innovation for an established luxury brand, maintaining heritage while embracing contemporary digital sophistication.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-content">
+    <h2 class="section-title">Our Philosophy</h2>
+    <p class="philosophy-text">We believe that true luxury lies not in excess, but in the deliberate choice of quality over quantity. Every detail is intentional. Every design decision serves a purpose. We create experiences that transcend trends, commanding respect through restraint and excellence.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-eyebrow">What Clients Say</div>
+    <h2 class="section-title">Testimonials</h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <p class="testimonial-text">"Their attention to detail is unmatched. They transformed our brand into something truly exceptional."</p>
+        <div class="testimonial-author">Alexandra Chen</div>
+        <div class="testimonial-role">CEO, Luxury Goods Co.</div>
+      </div>
+
+      <div class="testimonial">
+        <p class="testimonial-text">"Working with this team was a masterclass in elegant design thinking and strategic execution."</p>
+        <div class="testimonial-author">Marcus Wellington</div>
+        <div class="testimonial-role">Creative Director, Premium Brands</div>
+      </div>
+
+      <div class="testimonial">
+        <p class="testimonial-text">"They captured the essence of our brand and elevated it to new heights. Simply brilliant."</p>
+        <div class="testimonial-author">Sophie Laurent</div>
+        <div class="testimonial-role">Founder, Heritage Collective</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <h2 class="section-title">Get In Touch</h2>
+    <form class="contact-form">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Tell us about your project..." rows="5" required></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>&copy; 2026 Luxury Design Studio. All rights reserved. Crafted with precision.</p>
+</footer>
+
+</body>
+</html>
