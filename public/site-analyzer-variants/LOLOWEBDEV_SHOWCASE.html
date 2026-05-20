@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" id="html-root">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,6 +43,17 @@
       position: sticky;
       top: 0;
       z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .header-center {
+      flex: 1;
+      text-align: center;
+      min-width: 300px;
     }
 
     h1 {
@@ -60,6 +71,36 @@
       font-size: 1.05rem;
       color: var(--text-dim);
       letter-spacing: 0.05em;
+    }
+
+    .lang-toggle {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .lang-btn {
+      padding: 0.6rem 1rem;
+      background: rgba(0, 217, 255, 0.1);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+
+    .lang-btn.active {
+      background: var(--accent-cyan);
+      color: var(--bg);
+      border-color: var(--accent-cyan);
+    }
+
+    .lang-btn:hover {
+      border-color: var(--accent-cyan);
     }
 
     .container {
@@ -284,6 +325,10 @@
     }
 
     @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+      }
+
       h1 {
         font-size: 1.8rem;
       }
@@ -303,12 +348,18 @@
 <body>
 
 <header>
-  <h1>⚡ LOLOWEBDEV</h1>
-  <p class="subtitle">Before & After — 3 ADN Variants Showcase</p>
+  <div class="header-center">
+    <h1>⚡ LOLOWEBDEV</h1>
+    <p class="subtitle" data-i18n="showcase.subtitle">Before & After — 3 ADN Variants Showcase</p>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="es" onclick="setLanguage('es')">ES</button>
+    <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+  </div>
 </header>
 
 <div class="container">
-  <div class="section-title">Current <span>Version</span></div>
+  <div class="section-title"><span data-i18n="showcase.current">Current</span> <span>Version</span></div>
 
   <div class="variants-grid">
     <div class="variant-card">
@@ -316,22 +367,20 @@
         <span>ACTUAL</span>
       </div>
       <div class="variant-info">
-        <div class="variant-title">LOLOWEBDEV — Actual</div>
-        <div class="variant-subtitle">Current Baseline</div>
-        <div class="variant-description">
-          Simple, clean design with Inter typography, flat colors, and minimal styling. Serves as the baseline for our ADN variants.
-        </div>
+        <div class="variant-title" data-i18n="showcase.actual.title">LOLOWEBDEV — Actual</div>
+        <div class="variant-subtitle" data-i18n="showcase.actual.subtitle">Current Baseline</div>
+        <div class="variant-description" data-i18n="showcase.actual.description">Simple, clean design with Inter typography, flat colors, and minimal styling. Serves as the baseline for our ADN variants.</div>
         <div class="variant-features">
-          <span class="feature-tag">Minimal</span>
-          <span class="feature-tag">Fast</span>
-          <span class="feature-tag">Baseline</span>
+          <span class="feature-tag" data-i18n="showcase.tag.minimal">Minimal</span>
+          <span class="feature-tag" data-i18n="showcase.tag.fast">Fast</span>
+          <span class="feature-tag" data-i18n="showcase.tag.baseline">Baseline</span>
         </div>
-        <a href="LOLOWEBDEV_ACTUAL.html" class="view-button">View Full Site →</a>
+        <a href="LOLOWEBDEV_ACTUAL.html" class="view-button" data-i18n="showcase.button">View Full Site →</a>
       </div>
     </div>
   </div>
 
-  <div class="section-title">Redesigned <span>Variants</span></div>
+  <div class="section-title"><span data-i18n="showcase.redesigned">Redesigned</span> <span>Variants</span></div>
 
   <div class="variants-grid">
     <div class="variant-card">
@@ -339,34 +388,30 @@
         <span style="text-align: center;">LUXURY<br/>MINIMAL</span>
       </div>
       <div class="variant-info">
-        <div class="variant-title">Luxury Minimal</div>
-        <div class="variant-subtitle">Refined & Elegant</div>
-        <div class="variant-description">
-          Cormorant Garamond serif headings, gold accents with black and cream palette. Subtle animations, elegant spacing, premium typography.
-        </div>
+        <div class="variant-title" data-i18n="showcase.variantA.title">Luxury Minimal</div>
+        <div class="variant-subtitle" data-i18n="showcase.variantA.subtitle">Refined & Elegant</div>
+        <div class="variant-description" data-i18n="showcase.variantA.description">Cormorant Garamond serif headings, gold accents with black and cream palette. Subtle animations, elegant spacing, premium typography.</div>
         <div class="variant-features">
-          <span class="feature-tag gold">Serif</span>
-          <span class="feature-tag gold">Elegant</span>
-          <span class="feature-tag gold">Subtle</span>
+          <span class="feature-tag gold" data-i18n="showcase.tag.serif">Serif</span>
+          <span class="feature-tag gold" data-i18n="showcase.tag.elegant">Elegant</span>
+          <span class="feature-tag gold" data-i18n="showcase.tag.subtle">Subtle</span>
         </div>
-        <a href="LOLOWEBDEV_VARIANT_A.html" class="view-button">View Full Site →</a>
+        <a href="LOLOWEBDEV_VARIANT_A.html" class="view-button" data-i18n="showcase.button">View Full Site →</a>
       </div>
     </div>
 
     <div class="variant-card">
       <div class="variant-thumbnail" style="background: linear-gradient(135deg, #00D9FF 0%, #FF006E 100%);"></div>
       <div class="variant-info">
-        <div class="variant-title">Tech Forward</div>
-        <div class="variant-subtitle">Dynamic & Vibrant</div>
-        <div class="variant-description">
-          Plus Jakarta Sans bold typography, vibrant gradient colors (cyan, magenta, gold). Glassmorphic navbar, 11+ premium animations.
-        </div>
+        <div class="variant-title" data-i18n="showcase.variantB.title">Tech Forward</div>
+        <div class="variant-subtitle" data-i18n="showcase.variantB.subtitle">Dynamic & Vibrant</div>
+        <div class="variant-description" data-i18n="showcase.variantB.description">Plus Jakarta Sans bold typography, vibrant gradient colors (cyan, magenta, gold). Glassmorphic navbar, 11+ premium animations.</div>
         <div class="variant-features">
-          <span class="feature-tag">Gradient</span>
-          <span class="feature-tag">Premium</span>
-          <span class="feature-tag">Modern</span>
+          <span class="feature-tag" data-i18n="showcase.tag.gradient">Gradient</span>
+          <span class="feature-tag" data-i18n="showcase.tag.premium">Premium</span>
+          <span class="feature-tag" data-i18n="showcase.tag.modern">Modern</span>
         </div>
-        <a href="LOLOWEBDEV_VARIANT_B.html" class="view-button">View Full Site →</a>
+        <a href="LOLOWEBDEV_VARIANT_B.html" class="view-button" data-i18n="showcase.button">View Full Site →</a>
       </div>
     </div>
 
@@ -375,53 +420,161 @@
         <span style="text-align: center;">BRUTALIST<br/>BOLD</span>
       </div>
       <div class="variant-info">
-        <div class="variant-title">Brutalist Bold</div>
-        <div class="variant-subtitle">Provocative & Bold</div>
-        <div class="variant-description">
-          Outfit bold typography, black & white with magenta accent. Experimental animations (clip-path, skew), massive 9rem+ hero, asymmetric layouts.
-        </div>
+        <div class="variant-title" data-i18n="showcase.variantC.title">Brutalist Bold</div>
+        <div class="variant-subtitle" data-i18n="showcase.variantC.subtitle">Provocative & Bold</div>
+        <div class="variant-description" data-i18n="showcase.variantC.description">Outfit bold typography, black & white with magenta accent. Experimental animations (clip-path, skew), massive 9rem+ hero, asymmetric layouts.</div>
         <div class="variant-features">
-          <span class="feature-tag magenta">Monospace</span>
-          <span class="feature-tag magenta">Experimental</span>
-          <span class="feature-tag magenta">Statement</span>
+          <span class="feature-tag magenta" data-i18n="showcase.tag.monospace">Monospace</span>
+          <span class="feature-tag magenta" data-i18n="showcase.tag.experimental">Experimental</span>
+          <span class="feature-tag magenta" data-i18n="showcase.tag.statement">Statement</span>
         </div>
-        <a href="LOLOWEBDEV_VARIANT_C.html" class="view-button">View Full Site →</a>
+        <a href="LOLOWEBDEV_VARIANT_C.html" class="view-button" data-i18n="showcase.button">View Full Site →</a>
       </div>
     </div>
   </div>
 
   <div class="comparison-section">
-    <div class="comparison-title">Design <span>Comparison</span></div>
+    <div class="comparison-title"><span data-i18n="showcase.comparison">Design</span> <span>Comparison</span></div>
     <div class="comparison-grid">
       <div class="comparison-item">
-        <div class="comparison-label">Actual</div>
-        <div class="comparison-value">Inter / Minimal</div>
+        <div class="comparison-label" data-i18n="showcase.actual.title">Actual</div>
+        <div class="comparison-value">Inter / <span data-i18n="showcase.tag.minimal">Minimal</span></div>
       </div>
       <div class="comparison-item">
-        <div class="comparison-label">Variant A (Luxury)</div>
-        <div class="comparison-value">Cormorant / Gold</div>
+        <div class="comparison-label" data-i18n="showcase.variantA.abbr">Variant A</div>
+        <div class="comparison-value">Cormorant / <span data-i18n="showcase.tag.elegant">Elegant</span></div>
       </div>
       <div class="comparison-item">
-        <div class="comparison-label">Variant B (Tech)</div>
-        <div class="comparison-value">Plus Jakarta / Gradient</div>
+        <div class="comparison-label" data-i18n="showcase.variantB.abbr">Variant B</div>
+        <div class="comparison-value">Plus Jakarta / <span data-i18n="showcase.tag.gradient">Gradient</span></div>
       </div>
       <div class="comparison-item">
-        <div class="comparison-label">Variant C (Brutalist)</div>
-        <div class="comparison-value">Outfit / Magenta</div>
+        <div class="comparison-label" data-i18n="showcase.variantC.abbr">Variant C</div>
+        <div class="comparison-value">Outfit / <span data-i18n="showcase.tag.magenta">Magenta</span></div>
       </div>
     </div>
 
     <div class="nav-buttons">
-      <a href="index.html" class="nav-button">← ADN Variants Hub</a>
-      <a href="/site-analyzer-variants/index.html" class="nav-button">All Mockups →</a>
+      <a href="index.html" class="nav-button" data-i18n="showcase.nav.hub">← ADN Variants Hub</a>
+      <a href="/site-analyzer-variants/index.html" class="nav-button" data-i18n="showcase.nav.mockups">All Mockups →</a>
     </div>
   </div>
 </div>
 
 <footer>
-  <p>&copy; 2026 LOLOWEBDEV Site Analyzer. Three distinct design directions for your digital future.</p>
-  <p style="margin-top: 1rem; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;">BEFORE & AFTER SHOWCASE</p>
+  <p data-i18n="showcase.footer.main">&copy; 2026 LOLOWEBDEV Site Analyzer. Three distinct design directions for your digital future.</p>
+  <p style="margin-top: 1rem; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;" data-i18n="showcase.footer.sub">BEFORE & AFTER SHOWCASE</p>
 </footer>
+
+<script>
+const translations = {
+  es: {
+    'showcase.subtitle': 'Antes & Después — 3 Variantes ADN',
+    'showcase.current': 'Versión',
+    'showcase.redesigned': 'Variantes',
+    'showcase.actual.title': 'LOLOWEBDEV — Actual',
+    'showcase.actual.subtitle': 'Línea Base Actual',
+    'showcase.actual.description': 'Diseño simple y limpio con tipografía Inter, colores planos y estilo minimalista. Sirve como línea base para nuestras variantes ADN.',
+    'showcase.tag.minimal': 'Mínimo',
+    'showcase.tag.fast': 'Rápido',
+    'showcase.tag.baseline': 'Línea Base',
+    'showcase.variantA.title': 'Lujo Minimalista',
+    'showcase.variantA.subtitle': 'Refinado & Elegante',
+    'showcase.variantA.description': 'Encabezados serif Cormorant Garamond, acentos dorados con paleta negro/crema. Animaciones sutiles, espaciado elegante, tipografía premium.',
+    'showcase.tag.serif': 'Serif',
+    'showcase.tag.elegant': 'Elegante',
+    'showcase.tag.subtle': 'Sutil',
+    'showcase.variantB.title': 'Tech Forward',
+    'showcase.variantB.subtitle': 'Dinámico & Vibrante',
+    'showcase.variantB.description': 'Tipografía Plus Jakarta Sans bold, colores gradiente vibrantes (cyan, magenta, oro). Navbar glassmorphic, 11+ animaciones premium.',
+    'showcase.tag.gradient': 'Gradiente',
+    'showcase.tag.premium': 'Premium',
+    'showcase.tag.modern': 'Moderno',
+    'showcase.variantC.title': 'Brutalist Bold',
+    'showcase.variantC.subtitle': 'Provocador & Audaz',
+    'showcase.variantC.description': 'Tipografía Outfit bold, blanco y negro con acento magenta. Animaciones experimentales (clip-path, skew), hero masivo 9rem+, layouts asimétricos.',
+    'showcase.tag.monospace': 'Monospace',
+    'showcase.tag.experimental': 'Experimental',
+    'showcase.tag.statement': 'Statement',
+    'showcase.button': 'Ver Sitio Completo →',
+    'showcase.comparison': 'Comparación de',
+    'showcase.variantA.abbr': 'Variante A',
+    'showcase.variantB.abbr': 'Variante B',
+    'showcase.variantC.abbr': 'Variante C',
+    'showcase.nav.hub': '← Hub Variantes ADN',
+    'showcase.nav.mockups': 'Todos los Mockups →',
+    'showcase.footer.main': '© 2026 LOLOWEBDEV Site Analyzer. Tres direcciones de diseño distintas para tu futuro digital.',
+    'showcase.footer.sub': 'SHOWCASE ANTES & DESPUÉS',
+  },
+  en: {
+    'showcase.subtitle': 'Before & After — 3 ADN Variants',
+    'showcase.current': 'Current',
+    'showcase.redesigned': 'Redesigned',
+    'showcase.actual.title': 'LOLOWEBDEV — Actual',
+    'showcase.actual.subtitle': 'Current Baseline',
+    'showcase.actual.description': 'Simple, clean design with Inter typography, flat colors, and minimal styling. Serves as the baseline for our ADN variants.',
+    'showcase.tag.minimal': 'Minimal',
+    'showcase.tag.fast': 'Fast',
+    'showcase.tag.baseline': 'Baseline',
+    'showcase.variantA.title': 'Luxury Minimal',
+    'showcase.variantA.subtitle': 'Refined & Elegant',
+    'showcase.variantA.description': 'Cormorant Garamond serif headings, gold accents with black and cream palette. Subtle animations, elegant spacing, premium typography.',
+    'showcase.tag.serif': 'Serif',
+    'showcase.tag.elegant': 'Elegant',
+    'showcase.tag.subtle': 'Subtle',
+    'showcase.variantB.title': 'Tech Forward',
+    'showcase.variantB.subtitle': 'Dynamic & Vibrant',
+    'showcase.variantB.description': 'Plus Jakarta Sans bold typography, vibrant gradient colors (cyan, magenta, gold). Glassmorphic navbar, 11+ premium animations.',
+    'showcase.tag.gradient': 'Gradient',
+    'showcase.tag.premium': 'Premium',
+    'showcase.tag.modern': 'Modern',
+    'showcase.variantC.title': 'Brutalist Bold',
+    'showcase.variantC.subtitle': 'Provocative & Bold',
+    'showcase.variantC.description': 'Outfit bold typography, black & white with magenta accent. Experimental animations (clip-path, skew), massive 9rem+ hero, asymmetric layouts.',
+    'showcase.tag.monospace': 'Monospace',
+    'showcase.tag.experimental': 'Experimental',
+    'showcase.tag.statement': 'Statement',
+    'showcase.button': 'View Full Site →',
+    'showcase.comparison': 'Design',
+    'showcase.variantA.abbr': 'Variant A',
+    'showcase.variantB.abbr': 'Variant B',
+    'showcase.variantC.abbr': 'Variant C',
+    'showcase.nav.hub': '← ADN Variants Hub',
+    'showcase.nav.mockups': 'All Mockups →',
+    'showcase.footer.main': '© 2026 LOLOWEBDEV Site Analyzer. Three distinct design directions for your digital future.',
+    'showcase.footer.sub': 'BEFORE & AFTER SHOWCASE',
+  }
+};
+
+function detectLanguage() {
+  const saved = localStorage.getItem('lolowebdev-lang');
+  if (saved) return saved;
+
+  const browserLang = navigator.language || navigator.userLanguage;
+  return browserLang.startsWith('es') ? 'es' : 'en';
+}
+
+function setLanguage(lang) {
+  localStorage.setItem('lolowebdev-lang', lang);
+  document.getElementById('html-root').setAttribute('lang', lang);
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    el.textContent = translations[lang][key] || key;
+  });
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+
+  document.title = translations[lang]['showcase.subtitle'] + ' | LOLOWEBDEV';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const lang = detectLanguage();
+  setLanguage(lang);
+});
+</script>
 
 </body>
 </html>

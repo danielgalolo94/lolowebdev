@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" id="html-root">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LOLOWEBDEV — Sitio Actual</title>
+  <title>LOLOWEBDEV v2.0 — Actual</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -26,6 +26,15 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex: 1;
     }
 
     .logo {
@@ -38,6 +47,40 @@
       color: #666;
       text-decoration: none;
       font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #333;
+    }
+
+    .lang-toggle {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .lang-btn {
+      padding: 0.4rem 0.8rem;
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      color: #666;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+
+    .lang-btn.active {
+      background: #000;
+      color: #fff;
+      border-color: #000;
+    }
+
+    .lang-btn:hover {
+      border-color: #000;
     }
 
     .hero {
@@ -67,6 +110,11 @@
       text-decoration: none;
       border-radius: 4px;
       font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .cta-button:hover {
+      background: #333;
     }
 
     .features {
@@ -144,6 +192,21 @@
     }
 
     @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .header-left {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav a {
+        margin-left: 0;
+        display: block;
+      }
+
       .feature-grid {
         grid-template-columns: 1fr;
       }
@@ -157,63 +220,146 @@
 <body>
 
 <header>
-  <div class="logo">LOLOWEBDEV</div>
-  <nav>
-    <a href="#features">Features</a>
-    <a href="#phases">Phases</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <div class="header-left">
+    <div class="logo">LOLOWEBDEV</div>
+    <nav>
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#phases" data-i18n="nav.phases">Phases</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="es" onclick="setLanguage('es')">ES</button>
+    <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+  </div>
 </header>
 
 <section class="hero">
-  <h1>LOLOWEBDEV v2.0</h1>
-  <p>Sistema modular para crear landing pages cinematográficas con UX intelligence y video architecture.</p>
-  <a href="#" class="cta-button">Get Started</a>
+  <h1 data-i18n="actual.hero.title">LOLOWEBDEV v2.0</h1>
+  <p data-i18n="actual.hero.subtitle">Sistema modular para crear landing pages cinematográficas con UX intelligence y video architecture.</p>
+  <a href="#" class="cta-button" data-i18n="actual.hero.button">Get Started</a>
 </section>
 
 <section class="features" id="features">
-  <h2>What is LOLOWEBDEV?</h2>
+  <h2 data-i18n="actual.features.title">What is LOLOWEBDEV?</h2>
   <div class="feature-grid">
     <div class="feature-box">
-      <h3>🎬 Video-First</h3>
-      <p>Arquitectura diseñada para video cinematográfico con canvas rendering y scroll binding.</p>
+      <h3 data-i18n="actual.features.f1.title">🎬 Video-First</h3>
+      <p data-i18n="actual.features.f1.desc">Arquitectura diseñada para video cinematográfico con canvas rendering y scroll binding.</p>
     </div>
     <div class="feature-box">
-      <h3>⚡ Premium Animations</h3>
-      <p>11 tipos de animaciones con GSAP, Lenis smooth scroll, y micro-interacciones.</p>
+      <h3 data-i18n="actual.features.f2.title">⚡ Premium Animations</h3>
+      <p data-i18n="actual.features.f2.desc">11 tipos de animaciones con GSAP, Lenis smooth scroll, y micro-interacciones.</p>
     </div>
     <div class="feature-box">
-      <h3>🎨 Design Tokens</h3>
-      <p>Sistema de diseño completo con paletas de color, tipografía y spacing.</p>
+      <h3 data-i18n="actual.features.f3.title">🎨 Design Tokens</h3>
+      <p data-i18n="actual.features.f3.desc">Sistema de diseño completo con paletas de color, tipografía y spacing.</p>
     </div>
   </div>
 </section>
 
 <section class="phases" id="phases">
-  <h2>Implementation Phases</h2>
+  <h2 data-i18n="actual.phases.title">Implementation Phases</h2>
   <div class="phase-list">
     <div class="phase">
-      <h3>Phase 1: Foundation</h3>
-      <p>Design tokens, Lighthouse audit, folder structure. Establish baseline performance and design system.</p>
+      <h3 data-i18n="actual.phases.p1.title">Phase 1: Foundation</h3>
+      <p data-i18n="actual.phases.p1.desc">Design tokens, Lighthouse audit, folder structure. Establish baseline performance and design system.</p>
     </div>
     <div class="phase">
-      <h3>Phase 2: UX Enhancements</h3>
-      <p>Responsive typography, button states, micro-interactions. Implement accessibility standards.</p>
+      <h3 data-i18n="actual.phases.p2.title">Phase 2: UX Enhancements</h3>
+      <p data-i18n="actual.phases.p2.desc">Responsive typography, button states, micro-interactions. Implement accessibility standards.</p>
     </div>
     <div class="phase">
-      <h3>Phase 3: Video Integration</h3>
-      <p>Frame extraction, Lenis + GSAP setup. Canvas rendering and animation choreography.</p>
+      <h3 data-i18n="actual.phases.p3.title">Phase 3: Video Integration</h3>
+      <p data-i18n="actual.phases.p3.desc">Frame extraction, Lenis + GSAP setup. Canvas rendering and animation choreography.</p>
     </div>
     <div class="phase">
-      <h3>Phase 4: Testing & Deployment</h3>
-      <p>Jest tests, E2E testing, Lighthouse validation. Production deployment with monitoring.</p>
+      <h3 data-i18n="actual.phases.p4.title">Phase 4: Testing & Deployment</h3>
+      <p data-i18n="actual.phases.p4.desc">Jest tests, E2E testing, Lighthouse validation. Production deployment with monitoring.</p>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>&copy; 2026 LOLOWEBDEV. Cinematic landing pages for the modern web.</p>
+  <p data-i18n="actual.footer">&copy; 2026 LOLOWEBDEV. Cinematic landing pages for the modern web.</p>
 </footer>
+
+<script>
+const translations = {
+  es: {
+    'nav.features': 'Características',
+    'nav.phases': 'Fases',
+    'nav.contact': 'Contacto',
+    'actual.hero.title': 'LOLOWEBDEV v2.0',
+    'actual.hero.subtitle': 'Sistema modular para crear landing pages cinematográficas con UX intelligence y video architecture.',
+    'actual.hero.button': 'Comenzar',
+    'actual.features.title': '¿Qué es LOLOWEBDEV?',
+    'actual.features.f1.title': '🎬 Video-First',
+    'actual.features.f1.desc': 'Arquitectura diseñada para video cinematográfico con canvas rendering y scroll binding.',
+    'actual.features.f2.title': '⚡ Animaciones Premium',
+    'actual.features.f2.desc': '11 tipos de animaciones con GSAP, Lenis smooth scroll, y micro-interacciones.',
+    'actual.features.f3.title': '🎨 Design Tokens',
+    'actual.features.f3.desc': 'Sistema de diseño completo con paletas de color, tipografía y spacing.',
+    'actual.phases.title': 'Fases de Implementación',
+    'actual.phases.p1.title': 'Fase 1: Foundation',
+    'actual.phases.p1.desc': 'Design tokens, Lighthouse audit, estructura de carpetas. Establecer baseline de performance y sistema de diseño.',
+    'actual.phases.p2.title': 'Fase 2: UX Enhancements',
+    'actual.phases.p2.desc': 'Tipografía responsiva, button states, micro-interacciones. Implementar estándares de accesibilidad.',
+    'actual.phases.p3.title': 'Fase 3: Video Integration',
+    'actual.phases.p3.desc': 'Extracción de frames, Lenis + GSAP setup. Canvas rendering y animation choreography.',
+    'actual.phases.p4.title': 'Fase 4: Testing & Deployment',
+    'actual.phases.p4.desc': 'Jest tests, E2E testing, validación Lighthouse. Production deployment con monitoring.',
+    'actual.footer': '© 2026 LOLOWEBDEV. Landing pages cinematográficas para la web moderna.',
+  },
+  en: {
+    'nav.features': 'Features',
+    'nav.phases': 'Phases',
+    'nav.contact': 'Contact',
+    'actual.hero.title': 'LOLOWEBDEV v2.0',
+    'actual.hero.subtitle': 'Modular system for creating cinematic landing pages with UX intelligence and video architecture.',
+    'actual.hero.button': 'Get Started',
+    'actual.features.title': 'What is LOLOWEBDEV?',
+    'actual.features.f1.title': '🎬 Video-First',
+    'actual.features.f1.desc': 'Architecture designed for cinematic video with canvas rendering and scroll binding.',
+    'actual.features.f2.title': '⚡ Premium Animations',
+    'actual.features.f2.desc': '11 types of animations with GSAP, Lenis smooth scroll, and micro-interactions.',
+    'actual.features.f3.title': '🎨 Design Tokens',
+    'actual.features.f3.desc': 'Complete design system with color palettes, typography and spacing.',
+    'actual.phases.title': 'Implementation Phases',
+    'actual.phases.p1.title': 'Phase 1: Foundation',
+    'actual.phases.p1.desc': 'Design tokens, Lighthouse audit, folder structure. Establish baseline performance and design system.',
+    'actual.phases.p2.title': 'Phase 2: UX Enhancements',
+    'actual.phases.p2.desc': 'Responsive typography, button states, micro-interactions. Implement accessibility standards.',
+    'actual.phases.p3.title': 'Phase 3: Video Integration',
+    'actual.phases.p3.desc': 'Frame extraction, Lenis + GSAP setup. Canvas rendering and animation choreography.',
+    'actual.phases.p4.title': 'Phase 4: Testing & Deployment',
+    'actual.phases.p4.desc': 'Jest tests, E2E testing, Lighthouse validation. Production deployment with monitoring.',
+    'actual.footer': '© 2026 LOLOWEBDEV. Cinematic landing pages for the modern web.',
+  }
+};
+
+function detectLanguage() {
+  const saved = localStorage.getItem('lolowebdev-lang');
+  if (saved) return saved;
+  const browserLang = navigator.language || navigator.userLanguage;
+  return browserLang.startsWith('es') ? 'es' : 'en';
+}
+
+function setLanguage(lang) {
+  localStorage.setItem('lolowebdev-lang', lang);
+  document.getElementById('html-root').setAttribute('lang', lang);
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = translations[lang][el.getAttribute('data-i18n')] || el.getAttribute('data-i18n');
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  setLanguage(detectLanguage());
+});
+</script>
 
 </body>
 </html>

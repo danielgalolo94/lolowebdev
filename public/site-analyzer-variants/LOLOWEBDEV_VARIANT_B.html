@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" id="html-root">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,6 +50,15 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       background: rgba(10, 14, 39, 0.8);
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex: 1;
     }
 
     .logo {
@@ -92,6 +101,35 @@
 
     nav a:hover::before {
       width: 100%;
+    }
+
+    .lang-toggle {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .lang-btn {
+      padding: 0.5rem 0.9rem;
+      background: rgba(0, 217, 255, 0.1);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+
+    .lang-btn.active {
+      background: var(--accent-1);
+      color: var(--bg);
+      border-color: var(--accent-1);
+    }
+
+    .lang-btn:hover {
+      border-color: var(--accent-1);
     }
 
     .hero {
@@ -323,7 +361,10 @@
     @media (max-width: 768px) {
       header {
         flex-direction: column;
-        gap: 1rem;
+      }
+
+      .header-left {
+        flex-direction: column;
       }
 
       nav a {
@@ -339,57 +380,63 @@
 <body>
 
 <header>
-  <div class="logo">⚡ LOLOWEBDEV</div>
-  <nav>
-    <a href="#features">Features</a>
-    <a href="#phases">Phases</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <div class="header-left">
+    <div class="logo">⚡ LOLOWEBDEV</div>
+    <nav>
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#phases" data-i18n="nav.phases">Phases</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="es" onclick="setLanguage('es')">ES</button>
+    <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+  </div>
 </header>
 
 <section class="hero">
   <div class="hero-content">
-    <div class="hero-eyebrow">Next Generation Tech</div>
-    <h1>Transforming Ideas Into <span>Digital Reality</span></h1>
-    <p>Sistema modular de última generación para crear landing pages cinematográficas con arquitectura de video, animaciones premium y UX intelligence.</p>
-    <a href="#" class="cta-button">Explore Features</a>
+    <div class="hero-eyebrow" data-i18n="variantB.hero.eyebrow">Next Generation Tech</div>
+    <h1 data-i18n="variantB.hero.title">Transforming Ideas Into <span data-i18n="variantB.hero.span">Digital Reality</span></h1>
+    <p data-i18n="variantB.hero.subtitle">Sistema modular de última generación para crear landing pages cinematográficas con arquitectura de video, animaciones premium y UX intelligence.</p>
+    <a href="#" class="cta-button" data-i18n="variantB.hero.button">Explore Features</a>
   </div>
 </section>
 
 <section class="features" id="features">
   <div class="section-container">
-    <div class="section-eyebrow">Why LOLOWEBDEV</div>
-    <h2>Cutting-Edge <span>Capabilities</span></h2>
+    <div class="section-eyebrow" data-i18n="variantB.features.eyebrow">Why LOLOWEBDEV</div>
+    <h2 data-i18n="variantB.features.title">Cutting-Edge <span>Capabilities</span></h2>
 
     <div class="feature-grid">
       <div class="feature-box">
-        <h3>⚡ Video Architecture</h3>
-        <p>Canvas rendering con frame binding. Smooth scroll cinematográfico con GSAP + ScrollTrigger. Optimización para web con WebM + H.264.</p>
+        <h3 data-i18n="variantB.features.f1.title">⚡ Video Architecture</h3>
+        <p data-i18n="variantB.features.f1.desc">Canvas rendering con frame binding. Smooth scroll cinematográfico con GSAP + ScrollTrigger. Optimización para web con WebM + H.264.</p>
       </div>
 
       <div class="feature-box">
-        <h3>🎯 Premium Animations</h3>
-        <p>11 tipos de animaciones con validador de variedad. Lenis smooth scroll personalizado. Micro-interacciones cuidadosamente orquestadas.</p>
+        <h3 data-i18n="variantB.features.f2.title">🎯 Premium Animations</h3>
+        <p data-i18n="variantB.features.f2.desc">11 tipos de animaciones con validador de variedad. Lenis smooth scroll personalizado. Micro-interacciones cuidadosamente orquestadas.</p>
       </div>
 
       <div class="feature-box">
-        <h3>🎨 Design Tokens</h3>
-        <p>Sistema de diseño completo con TypeScript. Paletas por dominio (SaaS, Agency, Startup, E-commerce). Tipografía dinámica con clamp().</p>
+        <h3 data-i18n="variantB.features.f3.title">🎨 Design Tokens</h3>
+        <p data-i18n="variantB.features.f3.desc">Sistema de diseño completo con TypeScript. Paletas por dominio (SaaS, Agency, Startup, E-commerce). Tipografía dinámica con clamp().</p>
       </div>
 
       <div class="feature-box">
-        <h3>📊 Performance First</h3>
-        <p>Lighthouse 98+ guaranteed. Core Web Vitals monitoring. A/B testing con feature flags. Real-time analytics integration.</p>
+        <h3 data-i18n="variantB.features.f4.title">📊 Performance First</h3>
+        <p data-i18n="variantB.features.f4.desc">Lighthouse 98+ guaranteed. Core Web Vitals monitoring. A/B testing con feature flags. Real-time analytics integration.</p>
       </div>
 
       <div class="feature-box">
-        <h3>🔐 Production Ready</h3>
-        <p>Jest + React Testing Library. Playwright E2E testing. Sentry error tracking. Vercel deployment con caching headers.</p>
+        <h3 data-i18n="variantB.features.f5.title">🔐 Production Ready</h3>
+        <p data-i18n="variantB.features.f5.desc">Jest + React Testing Library. Playwright E2E testing. Sentry error tracking. Vercel deployment con caching headers.</p>
       </div>
 
       <div class="feature-box">
-        <h3>♿ Accessibility First</h3>
-        <p>WCAG AAA compliance. Semantic HTML + ARIA labels. Focus rings + reduced-motion detection. Screen reader optimized.</p>
+        <h3 data-i18n="variantB.features.f6.title">♿ Accessibility First</h3>
+        <p data-i18n="variantB.features.f6.desc">WCAG AAA compliance. Semantic HTML + ARIA labels. Focus rings + reduced-motion detection. Screen reader optimized.</p>
       </div>
     </div>
   </div>
@@ -397,31 +444,126 @@
 
 <section class="phases" id="phases">
   <div class="section-container">
-    <h2>Implementation Phases</h2>
+    <h2 data-i18n="variantB.phases.title">Implementation Phases</h2>
     <div class="phase-list">
       <div class="phase">
-        <h3>01</h3>
-        <p>Foundation</p>
+        <h3 data-i18n="variantB.phases.p1.label">01</h3>
+        <p data-i18n="variantB.phases.p1.title">Foundation</p>
       </div>
       <div class="phase">
-        <h3>02</h3>
-        <p>UX Enhancements</p>
+        <h3 data-i18n="variantB.phases.p2.label">02</h3>
+        <p data-i18n="variantB.phases.p2.title">UX Enhancements</p>
       </div>
       <div class="phase">
-        <h3>03</h3>
-        <p>Video Integration</p>
+        <h3 data-i18n="variantB.phases.p3.label">03</h3>
+        <p data-i18n="variantB.phases.p3.title">Video Integration</p>
       </div>
       <div class="phase">
-        <h3>04</h3>
-        <p>Testing & Deploy</p>
+        <h3 data-i18n="variantB.phases.p4.label">04</h3>
+        <p data-i18n="variantB.phases.p4.title">Testing & Deploy</p>
       </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>&copy; 2026 LOLOWEBDEV v2.0. Built for the future. Performance meets elegance.</p>
+  <p data-i18n="variantB.footer">&copy; 2026 LOLOWEBDEV v2.0. Built for the future. Performance meets elegance.</p>
 </footer>
+
+<script>
+const translations = {
+  es: {
+    'nav.features': 'Características',
+    'nav.phases': 'Fases',
+    'nav.contact': 'Contacto',
+    'variantB.hero.eyebrow': 'Tecnología de Próxima Generación',
+    'variantB.hero.title': 'Transformando Ideas en',
+    'variantB.hero.span': 'Realidad Digital',
+    'variantB.hero.subtitle': 'Sistema modular de última generación para crear landing pages cinematográficas con arquitectura de video, animaciones premium y UX intelligence.',
+    'variantB.hero.button': 'Explorar Características',
+    'variantB.features.eyebrow': 'Por qué LOLOWEBDEV',
+    'variantB.features.title': 'Capacidades de',
+    'variantB.features.f1.title': '⚡ Arquitectura de Video',
+    'variantB.features.f1.desc': 'Canvas rendering con frame binding. Smooth scroll cinematográfico con GSAP + ScrollTrigger. Optimización para web con WebM + H.264.',
+    'variantB.features.f2.title': '🎯 Animaciones Premium',
+    'variantB.features.f2.desc': '11 tipos de animaciones con validador de variedad. Lenis smooth scroll personalizado. Micro-interacciones cuidadosamente orquestadas.',
+    'variantB.features.f3.title': '🎨 Design Tokens',
+    'variantB.features.f3.desc': 'Sistema de diseño completo con TypeScript. Paletas por dominio (SaaS, Agency, Startup, E-commerce). Tipografía dinámica con clamp().',
+    'variantB.features.f4.title': '📊 Performance First',
+    'variantB.features.f4.desc': 'Lighthouse 98+ garantizado. Monitoreo de Core Web Vitals. A/B testing con feature flags. Integración de analytics en tiempo real.',
+    'variantB.features.f5.title': '🔐 Production Ready',
+    'variantB.features.f5.desc': 'Jest + React Testing Library. Testing E2E con Playwright. Error tracking con Sentry. Deployment en Vercel con caching headers.',
+    'variantB.features.f6.title': '♿ Accessibility First',
+    'variantB.features.f6.desc': 'Cumplimiento WCAG AAA. HTML semántico + etiquetas ARIA. Focus rings + detección de reduced-motion. Optimizado para screen readers.',
+    'variantB.phases.title': 'Fases de Implementación',
+    'variantB.phases.p1.label': '01',
+    'variantB.phases.p1.title': 'Foundation',
+    'variantB.phases.p2.label': '02',
+    'variantB.phases.p2.title': 'UX Enhancements',
+    'variantB.phases.p3.label': '03',
+    'variantB.phases.p3.title': 'Video Integration',
+    'variantB.phases.p4.label': '04',
+    'variantB.phases.p4.title': 'Testing & Deploy',
+    'variantB.footer': '© 2026 LOLOWEBDEV v2.0. Construido para el futuro. El rendimiento se encuentra con la elegancia.',
+  },
+  en: {
+    'nav.features': 'Features',
+    'nav.phases': 'Phases',
+    'nav.contact': 'Contact',
+    'variantB.hero.eyebrow': 'Next Generation Tech',
+    'variantB.hero.title': 'Transforming Ideas Into',
+    'variantB.hero.span': 'Digital Reality',
+    'variantB.hero.subtitle': 'Next-generation modular system for creating cinematic landing pages with video architecture, premium animations and UX intelligence.',
+    'variantB.hero.button': 'Explore Features',
+    'variantB.features.eyebrow': 'Why LOLOWEBDEV',
+    'variantB.features.title': 'Cutting-Edge',
+    'variantB.features.f1.title': '⚡ Video Architecture',
+    'variantB.features.f1.desc': 'Canvas rendering with frame binding. Cinematic smooth scroll with GSAP + ScrollTrigger. Web optimization with WebM + H.264.',
+    'variantB.features.f2.title': '🎯 Premium Animations',
+    'variantB.features.f2.desc': '11 animation types with variety validator. Custom Lenis smooth scroll. Carefully orchestrated micro-interactions.',
+    'variantB.features.f3.title': '🎨 Design Tokens',
+    'variantB.features.f3.desc': 'Complete design system with TypeScript. Domain-specific palettes (SaaS, Agency, Startup, E-commerce). Dynamic typography with clamp().',
+    'variantB.features.f4.title': '📊 Performance First',
+    'variantB.features.f4.desc': 'Lighthouse 98+ guaranteed. Core Web Vitals monitoring. A/B testing with feature flags. Real-time analytics integration.',
+    'variantB.features.f5.title': '🔐 Production Ready',
+    'variantB.features.f5.desc': 'Jest + React Testing Library. Playwright E2E testing. Sentry error tracking. Vercel deployment with caching headers.',
+    'variantB.features.f6.title': '♿ Accessibility First',
+    'variantB.features.f6.desc': 'WCAG AAA compliance. Semantic HTML + ARIA labels. Focus rings + reduced-motion detection. Screen reader optimized.',
+    'variantB.phases.title': 'Implementation Phases',
+    'variantB.phases.p1.label': '01',
+    'variantB.phases.p1.title': 'Foundation',
+    'variantB.phases.p2.label': '02',
+    'variantB.phases.p2.title': 'UX Enhancements',
+    'variantB.phases.p3.label': '03',
+    'variantB.phases.p3.title': 'Video Integration',
+    'variantB.phases.p4.label': '04',
+    'variantB.phases.p4.title': 'Testing & Deploy',
+    'variantB.footer': '© 2026 LOLOWEBDEV v2.0. Built for the future. Performance meets elegance.',
+  }
+};
+
+function detectLanguage() {
+  const saved = localStorage.getItem('lolowebdev-lang');
+  if (saved) return saved;
+  const browserLang = navigator.language || navigator.userLanguage;
+  return browserLang.startsWith('es') ? 'es' : 'en';
+}
+
+function setLanguage(lang) {
+  localStorage.setItem('lolowebdev-lang', lang);
+  document.getElementById('html-root').setAttribute('lang', lang);
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = translations[lang][el.getAttribute('data-i18n')] || el.getAttribute('data-i18n');
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  setLanguage(detectLanguage());
+});
+</script>
 
 </body>
 </html>
