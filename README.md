@@ -15,7 +15,7 @@
 
 Sistema modular y production-ready que genera landing pages de alta fidelidad con:
 
-- ✨ **Scroll Apple-style** cinematográfico y smooth
+- ✨ **Scroll-style** cinematográfico y smooth
 - 🎨 **Design system robusto** (3 paletas de color configurables)
 - ⚡ **React 19 + Next.js 15** (Server Components, optimización automática)
 - 🎭 **GSAP 3** (animaciones de peso y propósito)
