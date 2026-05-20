@@ -46,6 +46,19 @@ Especificaciones concretas para cada tipo de negocio: arquitectura, estética, a
 - Selection Matrix: Dominio → Estilo → Paleta → Tipografía
 - HTML samples, CSS patterns, video strategies
 
+### Discovery & Site Analyzer
+
+**[LOLOWEBDEV_SITE_ANALYZER.md](./LOLOWEBDEV_SITE_ANALYZER.md)** — Discovery Tool & Mockup Generator  
+Sistema de análisis y generación de 3 variantes de ADN antes de Phase 1.
+- Intake: URL actual o descripción del proyecto
+- 7 preguntas de discovery (estética, video, animaciones, contenido, technical, performance, mobile)
+- 3 mockups HTML completamente distintos:
+  * Variant A: Luxury Minimal (Cormorant serif, gold/black, estático, sutil)
+  * Variant B: Tech Forward (Plus Jakarta Sans, vibrant gradient, hero video, 11 animaciones)
+  * Variant C: Brutalist Bold (Outfit bold, black/white, motion graphics, grid asimétrico)
+- Selection + Refinement loop (híbridos permitidos)
+- Integration seamless a Phases 1-4
+
 ### Referencia Rápida & Implementación
 
 **[PHASE_1_QUICK_REFERENCE.md](./PHASE_1_QUICK_REFERENCE.md)** — Guía de Implementación Phase 1  
@@ -74,6 +87,11 @@ Prompt maestro original, componentes base, patrones establecidos.
 
 ## 🎯 Cómo Usar Esta Documentación
 
+### Para Descubrir tu ADN (Pre-Phase 1)
+→ Lee: **LOLOWEBDEV_SITE_ANALYZER.md** (discovery + 3 mockups)  
+→ Responde: 7 discovery questions  
+→ Elige: Variant favorita o mezcla de elementos  
+
 ### Para Entender la Visión General
 → Lee: **lolowebdev-enhanced.md** (10 min)
 
@@ -101,6 +119,7 @@ Prompt maestro original, componentes base, patrones establecidos.
 
 | Necesito... | Documento | Sección |
 |-------------|-----------|---------|
+| Descubrir mi ADN visual | site-analyzer | Discovery Questions + 3 Variants |
 | Elegir paleta de color | ux-guidelines | Paletas de Color por Dominio |
 | Elegir tipografía | ux-guidelines | Tipografía Estratégica |
 | Entender estilos UI | ux-guidelines | Estilos UI (6 opciones) |
@@ -123,7 +142,11 @@ Prompt maestro original, componentes base, patrones establecidos.
 ## 🚀 Flujo de Desarrollo Recomendado
 
 ```
-INICIO → Consultar lolowebdev-enhanced.md (visión general)
+INICIO → Ejecutar Site Analyzer (discovery + 3 mockups)
+  ↓
+ELEGIR ADN → User selecciona variant + refina si necesario
+  ↓
+ENTENDER VISIÓN → Consultar lolowebdev-enhanced.md
   ↓
 SELECCIONAR DOMINIO → Ver domain-templates.md
   ↓
@@ -148,6 +171,7 @@ VALIDAR QUALITY → Checker: Lighthouse 98+, WCAG AAA, Core Web Vitals
 - Componentes estáticos
 
 ### v2.0 Enhanced (ACTUAL)
+- **LOLOWEBDEV_SITE_ANALYZER.md** — Discovery + 3 ADN mockup variants
 - **lolowebdev-enhanced.md** — Arquitectura mejorada
 - **lolowebdev-ux-guidelines.md** — Base de datos UX integrada
 - **lolowebdev-video-integration.md** — Video + animation architecture
@@ -156,6 +180,7 @@ VALIDAR QUALITY → Checker: Lighthouse 98+, WCAG AAA, Core Web Vitals
 - Design tokens v2.0 (TypeScript + CSS custom)
 - Video architecture (Lenis + GSAP + Canvas)
 - Domain-aware generation
+- Site Analyzer discovery workflow
 
 ---
 
