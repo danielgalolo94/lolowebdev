@@ -46,7 +46,7 @@ Especificaciones concretas para cada tipo de negocio: arquitectura, estética, a
 - Selection Matrix: Dominio → Estilo → Paleta → Tipografía
 - HTML samples, CSS patterns, video strategies
 
-### Referencia Rápida
+### Referencia Rápida & Implementación
 
 **[PHASE_1_QUICK_REFERENCE.md](./PHASE_1_QUICK_REFERENCE.md)** — Guía de Implementación Phase 1  
 Checklist ejecutable para Foundation: audit UX, design tokens, estructura video.
@@ -55,6 +55,14 @@ Checklist ejecutable para Foundation: audit UX, design tokens, estructura video.
 - Tarea 3: Estructura de carpetas video + optimization guide
 - Success criteria Phase 1
 - Próximos pasos (Phase 2-4)
+
+**[PHASE_2_UX_ENHANCEMENTS.md](./PHASE_2_UX_ENHANCEMENTS.md)** — Guía de Implementación Phase 2  
+Jerarquía visual, micro-interacciones, accesibilidad avanzada (código incluido).
+- Tarea 1: Tipografía dinámica (clamp), espaciado progresivo, contrast audit
+- Tarea 2: Button states, card elevation, skeleton loaders, toast notifications
+- Tarea 3: Focus rings, reduced-motion detection, ARIA labels, color blindness
+- Tarea 4: Lighthouse 98+ validation, Core Web Vitals, performance checklist
+- Componentes TSX + CSS ejemplos completos
 
 ### Original Base
 
@@ -189,6 +197,7 @@ lolowebdev/
 
 ## ✅ Checklist de Documentación v2.0
 
+**Phase 1: Foundation** ✅
 - ✅ lolowebdev-enhanced.md — Visión + Arquitectura
 - ✅ lolowebdev-ux-guidelines.md — Estilos + Paletas + Tipografía + Tokens
 - ✅ lolowebdev-video-integration.md — Lenis + GSAP + Canvas + Patrones
@@ -196,7 +205,10 @@ lolowebdev/
 - ✅ PHASE_1_QUICK_REFERENCE.md — Implementación Phase 1
 - ✅ README.md (este) — Índice + Navegación
 
-**Status**: 🟢 Documentación v2.0 Completa  
+**Phase 2: UX Enhancements** 🟡 (En Progreso)
+- ✅ PHASE_2_UX_ENHANCEMENTS.md — Tipografía + Micro-interacciones + Accesibilidad (con código TSX + CSS)
+
+**Status**: 🟡 Phase 2 Started (documentación completada)  
 **Last Updated**: Mayo 20, 2026  
 **Source Integration**: ui-ux-pro-max-skill + antigravity-video-websites-skill
 
