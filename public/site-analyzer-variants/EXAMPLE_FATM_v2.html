@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FATM · Cinematic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#030810;--bg2:#060E1C;--bg3:#0A1628;
+  --cel:#74ACDF;--cell:#A8CCEC;--celd:#3E7AB8;
+  --gold:#F6B40E;
+  --w:rgba(255,255,255,1);--w9:rgba(255,255,255,.9);--w6:rgba(255,255,255,.6);
+  --w25:rgba(255,255,255,.25);--w10:rgba(255,255,255,.1);--w06:rgba(255,255,255,.06);
+  --bor:rgba(116,172,223,.14);--bors:rgba(116,172,223,.3);
+}
+html{overflow-x:hidden}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--w);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--celd);border-radius:4px}
+
+/* ── PROGRESS ── */
+#prog{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--celd),var(--cel),var(--gold));z-index:1000;pointer-events:none}
+
+/* ── TICKER ── */
+.ticker{position:relative;z-index:202;background:var(--celd);overflow:hidden;display:flex;align-items:center;height:36px}
+.ticker-tag{flex-shrink:0;background:var(--gold);color:#000;font-size:.62rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;padding:0 1.1rem;height:100%;display:flex;align-items:center;margin-right:1.5rem}
+.ticker-track{display:flex;animation:tick 32s linear infinite;white-space:nowrap}
+.ticker-track span{font-size:.74rem;font-weight:600;padding:0 2.5rem;color:rgba(255,255,255,.9)}
+.ticker-track span::before{content:'· ';color:var(--gold)}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ── NAVBAR ── */
+.navbar{position:fixed;top:36px;left:0;right:0;z-index:200;padding:.85rem 2.5rem;display:flex;align-items:center;justify-content:space-between;transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.navbar::before{content:'';position:absolute;inset:0;background:rgba(3,8,16,0);backdrop-filter:blur(0px);border-bottom:1px solid transparent;transition:background .4s,backdrop-filter .4s,border-color .4s;z-index:-1}
+.navbar.scrolled::before{background:rgba(3,8,16,.9);backdrop-filter:blur(24px);border-color:var(--bor)}
+.navbar.hidden{transform:translateY(-100%)}
+.nav-logo{display:flex;align-items:center;gap:.8rem;text-decoration:none}
+.nav-mark{width:36px;height:36px;background:linear-gradient(135deg,var(--cel),var(--celd));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.nav-wordmark{font-size:1.05rem;font-weight:900;letter-spacing:.04em}
+.nav-links{display:flex;gap:2.25rem;list-style:none}
+.nav-links a{color:var(--w6);text-decoration:none;font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;transition:color .25s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--cel);transition:width .3s cubic-bezier(.4,0,.2,1);border-radius:2px}
+.nav-links a:hover{color:var(--w)}.nav-links a:hover::after{width:100%}
+.nav-right{display:flex;gap:.75rem;align-items:center}
+.nbtn{display:inline-flex;align-items:center;gap:.4rem;padding:.42rem 1rem;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:5px;transition:all .25s}
+.nbtn-g{color:var(--w9);border:1px solid var(--w25);background:transparent}.nbtn-g:hover{border-color:var(--w6);background:var(--w06)}
+.nbtn-p{background:var(--celd);color:#fff;border:1px solid transparent}.nbtn-p:hover{background:var(--cel)}
+@media(max-width:960px){.nav-links{display:none}}
+
+/* ── HERO ── */
+.hero{position:relative;height:100vh;min-height:680px;overflow:hidden;display:flex;align-items:flex-end}
+.hero-bg{position:absolute;top:-80px;left:0;right:0;bottom:-80px;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(.48) saturate(1.15)}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,8,16,1) 0%,rgba(3,8,16,.05) 45%),linear-gradient(90deg,rgba(3,8,16,.7) 0%,transparent 60%),linear-gradient(135deg,rgba(116,172,223,.1) 0%,transparent 50%)}
+.hero-content{position:relative;z-index:10;max-width:90rem;margin:0 auto;padding:0 2.5rem 5.5rem;width:100%}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.65rem;font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--cell);margin-bottom:1.5rem;overflow:hidden}
+.hero-eye-inner{display:flex;align-items:center;gap:.65rem}
+.h-pulse{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:hpulse 1.8s infinite}
+@keyframes hpulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.4rem,7.5vw,7rem);font-weight:600;line-height:.98;letter-spacing:-.02em;margin-bottom:1.75rem}
+.hero-h1 .ln{display:block;overflow:hidden}
+.hero-h1 .ln-inner{display:block}
+.hero-h1 em{color:var(--cel);font-style:italic}
+.hero-meta{display:flex;align-items:flex-end;gap:3rem;flex-wrap:wrap;margin-bottom:2rem}
+.hero-sub{font-size:.98rem;font-weight:300;line-height:1.78;color:var(--w6);max-width:400px;overflow:hidden}
+.hero-sub-i{display:block}
+.hero-stats-row{display:flex;gap:2rem;flex-shrink:0}
+.h-stat{text-align:right}
+.h-stat-val{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:600;line-height:1}
+.h-stat-val.gold{color:var(--gold)}
+.h-stat-lbl{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cell);margin-top:.15rem}
+.hero-ctas{display:flex;gap:.85rem;flex-wrap:wrap;overflow:hidden}
+.hero-cta-i{display:flex;gap:.85rem}
+
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;z-index:10}
+.scroll-hint span{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--w6)}
+.scroll-arr{width:18px;height:18px;border-right:1.5px solid var(--cel);border-bottom:1.5px solid var(--cel);transform:rotate(45deg);animation:sarr 2s ease-in-out infinite}
+@keyframes sarr{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(5px)}}
+
+/* ── MANIFESTO ── */
+.manifesto{position:relative;min-height:100vh;display:flex;align-items:center;background:var(--bg2);padding:8rem 2.5rem;overflow:hidden}
+.mani-bg-num{position:absolute;right:-.05em;top:50%;transform:translateY(-50%);font-family:'Cormorant Garamond',serif;font-size:clamp(16rem,38vw,30rem);font-weight:700;color:rgba(116,172,223,.03);line-height:1;user-select:none;pointer-events:none}
+.mani-inner{max-width:90rem;margin:0 auto;width:100%;display:grid;grid-template-columns:200px 1fr;gap:6rem;align-items:center}
+@media(max-width:800px){.mani-inner{grid-template-columns:1fr}}
+.mani-label{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cel);display:flex;flex-direction:column;gap:1rem}
+.mani-line{width:40px;height:1.5px;background:var(--cel)}
+.mani-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.7rem,3.2vw,2.8rem);font-weight:400;line-height:1.45;color:var(--w6)}
+.mani-text .wd{display:inline-block}
+
+/* ── SECTION COMMONS ── */
+.sw{max-width:90rem;margin:0 auto;padding:0 2.5rem}
+.s-eye{font-size:.66rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cel);display:flex;align-items:center;gap:.75rem;margin-bottom:.85rem}
+.s-eye-line{display:inline-block;width:28px;height:1.5px;background:var(--cel);border-radius:2px;transform:scaleX(0);transform-origin:left center;transition:transform .55s cubic-bezier(0.22,1,.36,1) .2s}
+.s-eye.rev .s-eye-line{transform:scaleX(1)}
+.s-ttl{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4.2vw,3.6rem);font-weight:600;line-height:1.04;letter-spacing:-.01em}
+.s-ttl em{color:var(--cel);font-style:italic}
+
+/* ── LOGROS ── */
+.logros-s{padding:7rem 0}
+.logros-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--bor);border:1px solid var(--bor);margin-top:3.5rem}
+@media(max-width:700px){.logros-grid{grid-template-columns:repeat(2,1fr)}}
+.logro-c{background:var(--bg2);padding:3rem 2.5rem;position:relative;overflow:hidden;transition:background .25s;cursor:default}
+.logro-c::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--cel),var(--gold));transition:width .4s cubic-bezier(.4,0,.2,1)}
+.logro-c:hover{background:var(--w06)}.logro-c:hover::after{width:100%}
+.logro-num{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:600;line-height:1;color:var(--cel);margin-bottom:.5rem}
+.logro-c:first-child .logro-num{color:var(--gold)}
+.logro-lbl{font-size:.74rem;font-weight:600;color:var(--w6);line-height:1.5}
+.logro-lbl strong{display:block;color:var(--w9);font-size:.83rem;margin-bottom:.2rem}
+
+/* ── HORIZONTAL SCROLL ── */
+.hscroll-s{overflow:hidden;background:var(--bg)}
+.hscroll-head{padding:6rem 2.5rem 3rem;max-width:90rem;margin:0 auto}
+.hscroll-track{display:flex;gap:1.5px;width:max-content;padding:0 2.5rem 5rem}
+.p-card{width:320px;height:500px;position:relative;overflow:hidden;flex-shrink:0;background:var(--bg2);cursor:pointer}
+.p-card img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:grayscale(35%) brightness(.82);transition:filter .5s,transform .7s cubic-bezier(.4,0,.2,1)}
+.p-card:hover img{filter:grayscale(0%) brightness(1);transform:scale(1.03)}
+.p-grad{position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,8,16,.95) 0%,rgba(3,8,16,.35) 50%,transparent 100%)}
+.p-num{position:absolute;top:1.25rem;right:1.25rem;font-family:'Cormorant Garamond',serif;font-size:4.5rem;font-weight:700;line-height:1;color:rgba(116,172,223,.1)}
+.p-info{position:absolute;bottom:0;left:0;right:0;padding:1.75rem}
+.p-cat{font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--cell);margin-bottom:.4rem}
+.p-name{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;line-height:1.1}
+.p-badge{display:inline-flex;align-items:center;margin-top:.5rem;font-size:.6rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--cel);color:#030810;padding:.2rem .65rem;border-radius:3px}
+.p-badge.gold{background:var(--gold)}
+.arg-flag{position:absolute;top:1.25rem;left:1.25rem;width:28px;height:19px;border-radius:2px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.5)}
+.arg-flag::before,.arg-flag::after,.arg-flag>span{content:'';position:absolute;left:0;right:0;height:33.33%}
+.arg-flag::before{top:0;background:#74ACDF}
+.arg-flag::after{bottom:0;background:#74ACDF}
+.arg-flag>span{top:33.33%;background:#FFF}
+.arg-flag>em{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-style:normal;font-size:7px;color:#F6B40E;z-index:2}
+.hscroll-drag{padding:0 2.5rem 2.5rem;max-width:90rem;margin:0 auto;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--w6);display:flex;align-items:center;gap:.65rem}
+.drag-icon{width:32px;height:32px;border:1px solid var(--bors);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem}
+
+/* ── WTT ── */
+.wtt-s{padding:8rem 0}
+.wtt-wrap{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;border:1px solid var(--bor)}
+@media(max-width:800px){.wtt-wrap{grid-template-columns:1fr}}
+.wtt-media{position:relative;min-height:580px;overflow:hidden}
+.wtt-media img{width:100%;height:100%;object-fit:cover;filter:brightness(.7) saturate(.9);transform:scale(1.08)}
+.wtt-media-gr{position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,var(--bg2) 100%)}
+.wtt-label{position:absolute;top:2rem;left:2rem;background:var(--celd);color:#fff;font-size:.82rem;font-weight:900;padding:.45rem 1rem;border-radius:4px;letter-spacing:.04em}
+.wtt-body{background:var(--bg2);padding:4.5rem 3.5rem;display:flex;flex-direction:column;justify-content:center;gap:2rem}
+.wtt-tag{font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cel)}
+.wtt-h2{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;line-height:1.1}
+.wtt-p{font-size:.9rem;color:var(--w6);line-height:1.75}
+.wtt-specs{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.wtt-spec{background:var(--bg3);border:1px solid var(--bor);padding:1rem 1.25rem;border-radius:4px}
+.wtt-spec dt{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cell);margin-bottom:.25rem}
+.wtt-spec dd{font-size:.92rem;font-weight:700}
+
+/* ── NOTICIAS ── */
+.noticias-s{padding:7rem 0;background:var(--bg2)}
+.noticias-grid{display:grid;grid-template-columns:5fr 3fr;gap:1.5px;margin-top:3rem;background:var(--bor);border:1px solid var(--bor)}
+@media(max-width:900px){.noticias-grid{grid-template-columns:1fr}}
+.n-feat{position:relative;overflow:hidden;cursor:pointer;min-height:520px;display:flex;flex-direction:column;justify-content:flex-end}
+.n-feat-bg{position:absolute;inset:-50px 0;z-index:0}
+.n-feat-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.65) saturate(1.1)}
+.n-feat-gr{position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(3,8,16,1) 0%,rgba(3,8,16,.5) 45%,transparent 100%)}
+.n-feat-body{position:relative;z-index:2;padding:2.5rem}
+.n-cat{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .7rem;border-radius:2px;margin-bottom:.85rem}
+.cat-g{background:var(--gold);color:#000}.cat-b{background:var(--celd);color:#fff}
+.cat-s{background:rgba(255,255,255,.12);color:var(--w9);border:1px solid var(--w25)}
+.cat-i{background:rgba(116,172,223,.18);color:var(--cell);border:1px solid var(--bors)}
+.n-feat-body time{font-size:.7rem;font-weight:600;color:var(--w6);display:block;margin-bottom:.5rem}
+.n-feat-body h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.7rem,2.5vw,2.3rem);font-weight:600;line-height:1.2;margin-bottom:.75rem}
+.n-feat-body p{font-size:.84rem;color:var(--w6);line-height:1.65;max-width:500px}
+.n-stack{display:flex;flex-direction:column}
+.n-item{display:flex;border-bottom:1px solid var(--bor);cursor:pointer;overflow:hidden;transition:background .25s;min-height:130px}
+.n-item:last-child{border-bottom:none}.n-item:hover{background:var(--w06)}
+.n-thumb{width:130px;flex-shrink:0;overflow:hidden}
+.n-thumb img{width:100%;height:100%;object-fit:cover;filter:brightness(.8);transition:transform .5s}
+.n-item:hover .n-thumb img{transform:scale(1.08)}
+.n-body{padding:1.1rem 1.25rem;display:flex;flex-direction:column;justify-content:center;gap:.3rem}
+.n-body time{font-size:.63rem;font-weight:600;color:var(--w6)}
+.n-body h3{font-size:.87rem;font-weight:700;color:var(--w9);line-height:1.35}
+
+/* ── CTA ── */
+.cta-s{padding:9rem 0;text-align:center;position:relative;overflow:hidden;background:var(--bg3);border-top:1px solid var(--bor);border-bottom:1px solid var(--bor)}
+.cta-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(116,172,223,.07) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.cta-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5.5vw,5rem);font-weight:600;line-height:1.05;margin:.75rem 0 1.5rem}
+.cta-h2 em{color:var(--cel);font-style:italic}
+.cta-p{font-size:1rem;color:var(--w6);line-height:1.75;max-width:500px;margin:0 auto 2.75rem}
+.cta-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.75rem;font-size:.8rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;border-radius:4px;cursor:pointer;border:none;transition:all .3s cubic-bezier(.4,0,.2,1)}
+.btn-cel{background:var(--cel);color:#030810}.btn-cel:hover{background:var(--cell);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--w9);border:1px solid var(--w25)}.btn-ghost:hover{background:var(--w06);border-color:var(--w6);transform:translateY(-2px)}
+
+/* ── SPONSORS ── */
+.spon-s{padding:3rem 0;border-bottom:1px solid var(--bor)}
+.spon-lbl{font-size:.6rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--w6);text-align:center;margin-bottom:2rem}
+.spon-row{display:flex;justify-content:center;flex-wrap:wrap;gap:2.5rem;align-items:center}
+.spon-logo{font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.22);padding:.45rem 1.15rem;border:1px solid rgba(255,255,255,.07);border-radius:4px;transition:all .3s}
+.spon-logo:hover{color:var(--cell);border-color:var(--bors)}
+
+/* ── FOOTER ── */
+footer{background:var(--bg);border-top:1px solid var(--bor)}
+.f-main{max-width:90rem;margin:0 auto;padding:4.5rem 2.5rem 2.5rem;display:grid;grid-template-columns:2.5fr 1fr 1fr 1.2fr;gap:3rem}
+@media(max-width:900px){.f-main{grid-template-columns:1fr 1fr;gap:2.5rem}}
+@media(max-width:600px){.f-main{grid-template-columns:1fr}}
+.f-logo{display:flex;align-items:center;gap:.85rem;margin-bottom:1.5rem}
+.f-mark{width:32px;height:32px;background:linear-gradient(135deg,var(--cel),var(--celd));border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.f-name{font-size:1.05rem;font-weight:900;color:var(--w9)}
+.f-p{font-size:.8rem;color:var(--w6);line-height:1.7;margin-bottom:1.25rem}
+.f-addr{font-size:.74rem;color:var(--w6);line-height:1.9}.f-addr strong{color:var(--w9)}
+.f-social{display:flex;gap:.55rem;margin-top:1.5rem}
+.f-soc{width:34px;height:34px;background:var(--w06);border:1px solid var(--bor);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--w6);text-decoration:none;font-size:.7rem;font-weight:700;transition:all .25s}
+.f-soc:hover{background:var(--celd);border-color:var(--celd);color:#fff;transform:translateY(-2px)}
+.f-col h4{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--w9);margin-bottom:1.25rem}
+.f-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.f-col ul a{color:var(--w6);text-decoration:none;font-size:.79rem;transition:color .2s,padding-left .2s;display:block}
+.f-col ul a:hover{color:var(--cell);padding-left:5px}
+.f-bot{max-width:90rem;margin:0 auto;padding:1.5rem 2.5rem;border-top:1px solid var(--bor);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:var(--w6)}
+.f-bot a{color:var(--w6);text-decoration:none}.f-bot a:hover{color:var(--cell)}
+.f-links{display:flex;gap:1.5rem}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-tag">Últimas</div>
+  <div class="ticker-track">
+    <span>HISTÓRICO · Argentina Campeón Panamericano 2025 · Cifuentes &amp; Lorenzo</span>
+    <span>WTT Contender Buenos Aires · 23–27 Jul 2025 · Parque Olímpico · USD $100.000</span>
+    <span>Cifuentes #79 del mundo · El mejor ranking argentino de la historia</span>
+    <span>Ana Codina · #139 mundial · Mejor Atleta Femenino 2023 · COA</span>
+    <span>Sudamericano Lima · 23–29 junio · Argentina va por el título</span>
+    <span>HISTÓRICO · Argentina Campeón Panamericano 2025 · Cifuentes &amp; Lorenzo</span>
+    <span>WTT Contender Buenos Aires · 23–27 Jul 2025 · Parque Olímpico · USD $100.000</span>
+    <span>Cifuentes #79 del mundo · El mejor ranking argentino de la historia</span>
+    <span>Ana Codina · #139 mundial · Mejor Atleta Femenino 2023 · COA</span>
+    <span>Sudamericano Lima · 23–29 junio · Argentina va por el título</span>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-mark">🏓</div>
+    <span class="nav-wordmark">FATM</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Inicio</a></li>
+    <li><a href="#">Institucional</a></li>
+    <li><a href="#">Selección</a></li>
+    <li><a href="#">Competencias</a></li>
+    <li><a href="#">Rankings</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nbtn nbtn-g">@fatmoficial</a>
+    <a href="#" class="nbtn nbtn-p">Afiliarme</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" style="margin-top:36px">
+  <div class="hero-bg">
+    <img src="https://fatm.com.ar/storage/files/news/images/hMzXBw1ceImXMYsh1V3wKSN87i08fopdkN0LEqqC.jpg"
+         onerror="this.src='https://images.unsplash.com/photo-1519861531473-9200262188bf?w=1920&h=1080&fit=crop'"
+         alt="Argentina Campeón Panamericano 2025">
+    <div class="hero-ov"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eye-inner">
+        <span class="h-pulse"></span>
+        <span>Logro Histórico · Mayo 2025</span>
+      </div>
+    </div>
+    <h1 class="hero-h1">
+      <span class="ln"><span class="ln-inner">Argentina,</span></span>
+      <span class="ln"><span class="ln-inner"><em>Campeón</em></span></span>
+      <span class="ln"><span class="ln-inner"><em>Panamericano</em></span></span>
+    </h1>
+    <div class="hero-meta">
+      <p class="hero-sub"><span class="hero-sub-i">Por primera vez en la historia, la selección se consagró campeón panamericano. Cifuentes y Lorenzo, imbatibles.</span></p>
+      <div class="hero-stats-row">
+        <div class="h-stat">
+          <div class="h-stat-val gold">#79</div>
+          <div class="h-stat-lbl">Cifuentes · ITTF</div>
+        </div>
+        <div class="h-stat">
+          <div class="h-stat-val">1°</div>
+          <div class="h-stat-lbl">Panamericano</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-ctas">
+      <div class="hero-cta-i">
+        <a href="#" class="btn btn-cel">Leer cobertura completa</a>
+        <a href="#" class="btn btn-ghost">Ver selección →</a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint" id="scrollHint">
+    <span>Scroll</span>
+    <div class="scroll-arr"></div>
+  </div>
+</section>
+
+<!-- ══ MANIFESTO ══ -->
+<section class="manifesto" id="manifesto">
+  <div class="mani-bg-num">1°</div>
+  <div class="mani-inner">
+    <div class="mani-label" id="maniLabel">
+      <div class="mani-line" id="maniLine"></div>
+      Identidad<br>Argentina
+    </div>
+    <p class="mani-text" id="maniText">El tenis de mesa argentino no es sólo un deporte. Es la historia de hombres y mujeres que eligieron la paleta sobre todo lo demás. Es Cifuentes viajando al otro lado del mundo para volver con el ranking más alto de la historia. Es Ana Codina ganando veintiocho oros nacionales. Es un país que, por primera vez, se planta en el continente y dice: somos los mejores.</p>
+  </div>
+</section>
+
+<!-- ══ LOGROS ══ -->
+<section class="logros-s" id="logros">
+  <div class="sw">
+    <div class="s-eye" id="logEye"><span class="s-eye-line"></span>En Números</div>
+    <h2 class="s-ttl">Lo que <em>construimos</em></h2>
+    <div class="logros-grid">
+      <div class="logro-c">
+        <div class="logro-num" id="cn-pan">1°</div>
+        <div class="logro-lbl"><strong>Campeón Panamericano</strong>Primera vez en la historia · 2025</div>
+      </div>
+      <div class="logro-c">
+        <div class="logro-num" id="cn-rank">#200</div>
+        <div class="logro-lbl"><strong>Ranking ITTF · Cifuentes</strong>Mejor resultado argentino histórico</div>
+      </div>
+      <div class="logro-c">
+        <div class="logro-num" id="cn-oros">0</div>
+        <div class="logro-lbl"><strong>Oros Nacionales · Ana Codina</strong>La más grande del tenis de mesa femenino</div>
+      </div>
+      <div class="logro-c">
+        <div class="logro-num" id="cn-clubes">0</div>
+        <div class="logro-lbl"><strong>Clubes Afiliados</strong>En todo el territorio nacional</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HORIZONTAL SCROLL ══ -->
+<div class="hscroll-s" id="hscrollS">
+  <div class="hscroll-head">
+    <div class="s-eye" id="selEye"><span class="s-eye-line"></span>Selección Argentina</div>
+    <h2 class="s-ttl">Nuestros <em>Jugadores</em></h2>
+  </div>
+  <div class="hscroll-track" id="htrack">
+    <div class="p-card">
+      <div class="arg-flag"><span></span><em>☀</em></div>
+      <img src="https://fatm.com.ar/storage/files/news/images/ObSZL3NWnrTfNgH04Efpo4OqNDKbaQLT9RS2si1Q.jpg"
+           onerror="this.src='https://images.unsplash.com/photo-1614680376408-81e91ffe3db7?w=640&h=800&fit=crop'" alt="Horacio Cifuentes">
+      <div class="p-grad"></div><div class="p-num">01</div>
+      <div class="p-info">
+        <div class="p-cat">Masculino · Buenos Aires</div>
+        <div class="p-name">Horacio Cifuentes</div>
+        <span class="p-badge gold">ITTF #79</span>
+      </div>
+    </div>
+    <div class="p-card">
+      <div class="arg-flag"><span></span><em>☀</em></div>
+      <img src="https://fatm.com.ar/storage/files/news/images/4kSklj3esBGzQMsyKCmMbES0xEPWP56ZlP7vqL7R.jpg"
+           onerror="this.src='https://images.unsplash.com/photo-1580910051074-3eb694886505?w=640&h=800&fit=crop'" alt="Santiago Lorenzo">
+      <div class="p-grad"></div><div class="p-num">02</div>
+      <div class="p-info">
+        <div class="p-cat">Masculino · Buenos Aires</div>
+        <div class="p-name">Santiago Lorenzo</div>
+        <span class="p-badge">ITTF #122</span>
+      </div>
+    </div>
+    <div class="p-card">
+      <div class="arg-flag"><span></span><em>☀</em></div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Giselle_Mu%C3%B1oz_2008_Slovenia.jpeg/600px-Giselle_Mu%C3%B1oz_2008_Slovenia.jpeg"
+           onerror="this.src='https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=640&h=800&fit=crop'" alt="Ana Codina">
+      <div class="p-grad"></div><div class="p-num">03</div>
+      <div class="p-info">
+        <div class="p-cat">Femenino · Chaco</div>
+        <div class="p-name">Ana Codina</div>
+        <span class="p-badge gold">ITTF #139</span>
+      </div>
+    </div>
+    <div class="p-card">
+      <div class="arg-flag"><span></span><em>☀</em></div>
+      <img src="https://fatm.com.ar/storage/files/news/images/QuNq6xhoWFcq1nyHo1Y84ZsE8BknnLjBHO4Gfosx.jpg"
+           onerror="this.src='https://images.unsplash.com/photo-1547941126-3d5322b218b0?w=640&h=800&fit=crop'" alt="Candela Molero">
+      <div class="p-grad"></div><div class="p-num">04</div>
+      <div class="p-info">
+        <div class="p-cat">Femenino · Buenos Aires</div>
+        <div class="p-name">Candela Molero</div>
+        <span class="p-badge">Bicampeona</span>
+      </div>
+    </div>
+    <div class="p-card">
+      <div class="arg-flag"><span></span><em>☀</em></div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Coty_Garrone.jpg"
+           onerror="this.src='https://images.unsplash.com/photo-1593341646782-e0b495cff86d?w=640&h=800&fit=crop'" alt="Coty Garrone">
+      <div class="p-grad"></div><div class="p-num">05</div>
+      <div class="p-info">
+        <div class="p-cat">Tenis Adaptado · Ituzaingó</div>
+        <div class="p-name">Coty Garrone</div>
+        <span class="p-badge gold">Campeona Mundial</span>
+      </div>
+    </div>
+    <div class="p-card">
+      <div class="arg-flag"><span></span><em>☀</em></div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Giselle_Munoz.jpg"
+           onerror="this.src='https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=640&h=800&fit=crop'" alt="Giselle Muñoz">
+      <div class="p-grad"></div><div class="p-num">06</div>
+      <div class="p-info">
+        <div class="p-cat">Femenino · Leyenda</div>
+        <div class="p-name">Giselle Muñoz</div>
+        <span class="p-badge">Referente histórica</span>
+      </div>
+    </div>
+  </div>
+  <div class="hscroll-drag">
+    <div class="drag-icon">→</div>
+    Deslizá para ver el plantel completo
+  </div>
+</div>
+
+<!-- ══ WTT ══ -->
+<section class="wtt-s">
+  <div class="sw" style="padding:0 2.5rem">
+    <div class="wtt-wrap" id="wttWrap">
+      <div class="wtt-media" id="wttMedia">
+        <img src="https://fatm.com.ar/storage/files/news/images/ObSZL3NWnrTfNgH04Efpo4OqNDKbaQLT9RS2si1Q.jpg"
+             onerror="this.src='https://images.unsplash.com/photo-1611339555312-e607c25352ca?w=900&h=700&fit=crop'" alt="WTT">
+        <div class="wtt-media-gr"></div>
+        <div class="wtt-label">WTT 2025</div>
+      </div>
+      <div class="wtt-body" id="wttBody">
+        <div class="wtt-tag" id="wttTag">Evento Internacional · Buenos Aires</div>
+        <h2 class="wtt-h2" id="wttH2">El tenis de mesa de élite, <em style="color:var(--cel);font-style:italic">en casa</em></h2>
+        <p class="wtt-p" id="wttP">Los mejores 32 jugadores del mundo en el Pabellón América del Parque Olímpico. Una oportunidad única de ver en vivo al deporte que Argentina llevó a lo más alto del continente.</p>
+        <dl class="wtt-specs" id="wttSpecs">
+          <div class="wtt-spec"><dt>Fecha</dt><dd>23 – 27 Jul 2025</dd></div>
+          <div class="wtt-spec"><dt>Sede</dt><dd>Parque Olímpico</dd></div>
+          <div class="wtt-spec"><dt>Premio</dt><dd>USD $100.000</dd></div>
+          <div class="wtt-spec"><dt>Participantes</dt><dd>Top 32 del mundo</dd></div>
+        </dl>
+        <div style="display:flex;gap:.85rem;flex-wrap:wrap" id="wttBtns">
+          <a href="#" class="btn btn-cel">Obtener entradas</a>
+          <a href="#" class="btn btn-ghost">Ver fixture</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ NOTICIAS ══ -->
+<section class="noticias-s">
+  <div class="sw">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem">
+      <div>
+        <div class="s-eye" id="notEye"><span class="s-eye-line"></span>Actualidad</div>
+        <h2 class="s-ttl">Últimas <em>Noticias</em></h2>
+      </div>
+      <a href="#" class="btn btn-ghost" style="font-size:.72rem;padding:.55rem 1.25rem;">Ver todas →</a>
+    </div>
+    <div class="noticias-grid">
+      <div class="n-feat" id="nFeat">
+        <div class="n-feat-bg"><img src="https://fatm.com.ar/storage/files/news/images/hMzXBw1ceImXMYsh1V3wKSN87i08fopdkN0LEqqC.jpg" onerror="this.src='https://images.unsplash.com/photo-1519861531473-9200262188bf?w=900&h=600&fit=crop'" alt="Pan"></div>
+        <div class="n-feat-gr"></div>
+        <div class="n-feat-body">
+          <span class="n-cat cat-g">🏆 Logro Histórico</span>
+          <time>12 de mayo, 2025</time>
+          <h2>Argentina se consagró Campeón Panamericano por primera vez en su historia</h2>
+          <p>Cifuentes y Lorenzo se coronaron en dobles. El equipo masculino ganó por equipos. Un hito sin precedentes para el deporte argentino.</p>
+        </div>
+      </div>
+      <div class="n-stack" id="nStack">
+        <div class="n-item">
+          <div class="n-thumb"><img src="https://fatm.com.ar/storage/files/news/images/ObSZL3NWnrTfNgH04Efpo4OqNDKbaQLT9RS2si1Q.jpg" onerror="this.src='https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=260&h=200&fit=crop'" alt=""></div>
+          <div class="n-body"><span class="n-cat cat-b" style="font-size:.57rem;padding:.15rem .55rem;margin-bottom:.2rem">WTT Buenos Aires</span><time>23 jul · 2025</time><h3>Los mejores del mundo llegan al Parque Olímpico para el WTT Contender 2025</h3></div>
+        </div>
+        <div class="n-item">
+          <div class="n-thumb"><img src="https://fatm.com.ar/storage/files/news/images/4kSklj3esBGzQMsyKCmMbES0xEPWP56ZlP7vqL7R.jpg" onerror="this.src='https://images.unsplash.com/photo-1547941126-3d5322b218b0?w=260&h=200&fit=crop'" alt=""></div>
+          <div class="n-body"><span class="n-cat cat-i" style="font-size:.57rem;padding:.15rem .55rem;margin-bottom:.2rem">Institucional</span><time>28 mar · 2025</time><h3>Ana Codina y Santiago Lorenzo recibieron el Premio Centenario del COA</h3></div>
+        </div>
+        <div class="n-item">
+          <div class="n-thumb"><img src="https://fatm.com.ar/storage/files/news/images/of7ug4bo445UHH975unAU4qKOWHdWzEZsO0kC4Ju.jpg" onerror="this.src='https://images.unsplash.com/photo-1593341646782-e0b495cff86d?w=260&h=200&fit=crop'" alt=""></div>
+          <div class="n-body"><span class="n-cat cat-b" style="font-size:.57rem;padding:.15rem .55rem;margin-bottom:.2rem">Competencias</span><time>Abr · 2025</time><h3>70° Campeonato Argentino en Rosario: Cifuentes y Molero campeones nacionales</h3></div>
+        </div>
+        <div class="n-item">
+          <div class="n-thumb"><img src="https://fatm.com.ar/storage/files/news/images/wFMhDxP9ZItdN9YziMzV2pIZKglBclTzXitdOMwZ.jpg" onerror="this.src='https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=260&h=200&fit=crop'" alt=""></div>
+          <div class="n-body"><span class="n-cat cat-s" style="font-size:.57rem;padding:.15rem .55rem;margin-bottom:.2rem">Juveniles</span><time>2025</time><h3>WTT Youth Contender: Argentina con fuerte presencia juvenil</h3></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-s" id="ctaS">
+  <div class="cta-glow"></div>
+  <div class="sw" style="position:relative;z-index:1">
+    <div class="s-eye" id="ctaEye" style="justify-content:center"><span class="s-eye-line"></span>Sumate</div>
+    <h2 class="cta-h2" id="ctaH2">¿Jugás tenis de mesa?<br><em>La FATM es tu lugar.</em></h2>
+    <p class="cta-p" id="ctaP">Participá en las mejores competencias del país y Sudamérica. Accedé al ranking nacional y representá a tu provincia.</p>
+    <div class="cta-btns" id="ctaBtns">
+      <a href="#" class="btn btn-cel">Afiliarme a la FATM</a>
+      <a href="#" class="btn btn-ghost">Encontrar un club</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SPONSORS ══ -->
+<section class="spon-s">
+  <div class="sw">
+    <div class="spon-lbl">Organismos internacionales y patrocinadores</div>
+    <div class="spon-row" id="sponRow">
+      <span class="spon-logo">ITTF</span><span class="spon-logo">WTT</span>
+      <span class="spon-logo">PATT</span><span class="spon-logo">COA</span>
+      <span class="spon-logo">ENARD</span><span class="spon-logo">Sec. Deportes</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="f-main" id="fMain">
+    <div>
+      <div class="f-logo"><div class="f-mark">🏓</div><span class="f-name">FATM</span></div>
+      <p class="f-p">Federación Argentina de Tenis de Mesa. Organismo rector afiliado a la ITTF y la PATT. Promovemos el deporte en todo el territorio nacional.</p>
+      <div class="f-addr"><strong>Sede Central</strong><br>Viamonte 1526 Piso 3° Of. A · CABA<br><strong>Email:</strong> info@fatm.org.ar</div>
+      <div class="f-social">
+        <a href="#" class="f-soc">IG</a><a href="#" class="f-soc">FB</a>
+        <a href="#" class="f-soc">YT</a><a href="#" class="f-soc">TW</a>
+      </div>
+    </div>
+    <div class="f-col"><h4>Institucional</h4><ul><li><a href="#">Quiénes somos</a></li><li><a href="#">Comisión Directiva</a></li><li><a href="#">Historia</a></li><li><a href="#">Estatuto</a></li><li><a href="#">Prensa</a></li></ul></div>
+    <div class="f-col"><h4>Competencias</h4><ul><li><a href="#">Campeonato Argentino</a></li><li><a href="#">Grand Prix</a></li><li><a href="#">WTT Buenos Aires</a></li><li><a href="#">Reglamentos</a></li><li><a href="#">Calendario</a></li></ul></div>
+    <div class="f-col"><h4>Selección</h4><ul><li><a href="#">Equipo Nacional</a></li><li><a href="#">Ranking Nacional</a></li><li><a href="#">Tenis Adaptado</a></li><li><a href="#">Juveniles</a></li><li><a href="#">Afiliarse</a></li></ul></div>
+  </div>
+  <div class="f-bot">
+    <span>© 2025 FATM · Federación Argentina de Tenis de Mesa</span>
+    <div class="f-links"><a href="#">Privacidad</a><a href="#">Términos</a><a href="#">Contacto</a></div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── NAVBAR ── */
+let lastY = 0;
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  nav.classList.toggle('hidden', y > lastY && y > 100);
+  nav.classList.toggle('scrolled', y > 40);
+  lastY = y;
+}, { passive: true });
+
+/* ── PROGRESS BAR ── */
+ScrollTrigger.create({
+  start: 'top top', end: 'bottom bottom',
+  onUpdate: s => document.getElementById('prog').style.width = (s.progress * 100) + '%'
+});
+
+/* ── HERO: paralax + split-line reveal ── */
+gsap.to('.hero-bg', {
+  y: 80, ease: 'none',
+  scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.4 }
+});
+gsap.to('.hero-content', {
+  opacity: 0, y: -80, ease: 'none',
+  scrollTrigger: { trigger: '.hero', start: '42% top', end: '88% top', scrub: 1 }
+});
+
+// Líneas del H1: cada una entra desde abajo
+gsap.from('.hero-h1 .ln-inner', {
+  y: '105%', duration: 1.1, stagger: 0.14, ease: 'power3.out', delay: 0.3
+});
+gsap.from('.hero-eye-inner', { y: 30, opacity: 0, duration: 0.9, ease: 'power2.out', delay: 0.15 });
+gsap.from('.hero-sub-i',     { y: 28, opacity: 0, duration: 0.85, ease: 'power2.out', delay: 0.85 });
+gsap.from('.h-stat',         { y: 24, opacity: 0, stagger: 0.12, duration: 0.75, ease: 'power2.out', delay: 1.0 });
+gsap.from('.hero-cta-i',     { y: 22, opacity: 0, duration: 0.7, ease: 'power2.out', delay: 1.2 });
+gsap.from('#scrollHint',     { opacity: 0, duration: 1.2, ease: 'power2.out', delay: 2.0 });
+
+/* ── MANIFESTO: word-by-word scrub ── */
+(function(){
+  const el = document.getElementById('maniText');
+  const words = el.textContent.trim().split(/\s+/);
+  el.innerHTML = words.map(w => `<span class="wd">${w}</span>`).join(' ');
+  const wds = el.querySelectorAll('.wd');
+  gsap.set(wds, { color: 'rgba(116,172,223,.1)' });
+
+  gsap.timeline({
+    scrollTrigger: {
+      trigger: '#manifesto', start: 'top 65%', end: 'bottom 35%', scrub: 1.8
+    }
+  }).to(wds, {
+    color: 'rgba(255,255,255,.92)',
+    stagger: { each: 0.1 },
+    ease: 'none',
+    duration: wds.length * 0.1
+  });
+
+  // label entra + línea crece
+  const lbl = document.getElementById('maniLabel');
+  gsap.from(lbl, {
+    opacity: 0, x: -40, duration: 0.8, ease: 'power2.out',
+    scrollTrigger: { trigger: '#manifesto', start: 'top 75%' }
+  });
+  gsap.to(document.getElementById('maniLine'), {
+    scaleX: 1, transformOrigin: 'left center', duration: 0.6, ease: 'power2.out', delay: 0.2,
+    scrollTrigger: { trigger: '#manifesto', start: 'top 75%' }
+  });
+  gsap.set(document.getElementById('maniLine'), { scaleX: 0 });
+})();
+
+/* ── HELPER: eyebrow reveal con línea ── */
+function eyebrow(id, trig) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  gsap.from(el, {
+    opacity: 0, x: -28, duration: 0.65, ease: 'power2.out',
+    scrollTrigger: {
+      trigger: trig || el, start: 'top 88%',
+      onEnter: () => el.classList.add('rev')
+    }
+  });
+}
+function title(sel, trig) {
+  gsap.from(sel, {
+    opacity: 0, y: 52, duration: 1.0, ease: 'power3.out',
+    scrollTrigger: { trigger: trig || sel, start: 'top 86%' }
+  });
+}
+
+/* ── LOGROS: contadores + stagger ── */
+eyebrow('logEye');
+title('.logros-s .s-ttl', '#logros');
+
+gsap.from('.logro-c', {
+  opacity: 0, y: 65, scale: 0.92, stagger: 0.1, duration: 0.9, ease: 'power3.out',
+  scrollTrigger: { trigger: '.logros-grid', start: 'top 82%' }
+});
+
+function counter(id, from, to, prefix, suffix) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const obj = { v: from };
+  gsap.to(obj, {
+    v: to, duration: 2.2, ease: 'power2.out',
+    onUpdate() { el.textContent = (prefix||'') + Math.round(obj.v) + (suffix||''); },
+    scrollTrigger: { trigger: el, start: 'top 80%' }
+  });
+}
+counter('cn-rank', 200, 79, '#', '');
+counter('cn-oros', 0, 28, '', '');
+counter('cn-clubes', 0, 45, '', '+');
+
+/* ── HORIZONTAL SCROLL: pinned track ── */
+eyebrow('selEye', '.hscroll-head');
+title('.hscroll-head .s-ttl', '.hscroll-head');
+
+window.addEventListener('load', () => {
+  const track = document.getElementById('htrack');
+  const section = document.getElementById('hscrollS');
+  const pad = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+  const totalX = track.scrollWidth - window.innerWidth + pad;
+
+  gsap.set('.p-card', { opacity: 0, y: 40 });
+
+  gsap.to(track, {
+    x: () => -totalX,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: section,
+      start: 'top top',
+      end: () => '+=' + totalX,
+      pin: true,
+      scrub: 1,
+      anticipatePin: 1,
+      onEnter() {
+        gsap.to('.p-card', { opacity: 1, y: 0, stagger: 0.09, duration: 0.75, ease: 'power2.out' });
+      }
+    }
+  });
+  ScrollTrigger.refresh();
+});
+
+/* ── WTT: clip-path wipe + body stagger ── */
+gsap.set('#wttMedia', { clipPath: 'inset(0 100% 0 0)' });
+gsap.to('#wttMedia', {
+  clipPath: 'inset(0 0% 0 0)', duration: 1.3, ease: 'power3.inOut',
+  scrollTrigger: { trigger: '#wttWrap', start: 'top 76%' }
+});
+
+// Parallax en imagen WTT
+gsap.from('#wttMedia img', {
+  scale: 1.12,
+  scrollTrigger: { trigger: '#wttWrap', start: 'top bottom', end: 'bottom top', scrub: 1.5 }
+});
+
+gsap.from(['#wttTag','#wttH2','#wttP','#wttSpecs','#wttBtns'], {
+  opacity: 0, x: 50, stagger: 0.14, duration: 0.82, ease: 'power2.out',
+  scrollTrigger: { trigger: '#wttWrap', start: 'top 74%' }
+});
+
+/* ── NOTICIAS ── */
+eyebrow('notEye');
+title('.noticias-s .s-ttl', '.noticias-s');
+
+// Parallax en imagen del featured
+gsap.to('#nFeat .n-feat-bg', {
+  y: 65, ease: 'none',
+  scrollTrigger: { trigger: '#nFeat', start: 'top bottom', end: 'bottom top', scrub: 1.5 }
+});
+gsap.from('#nFeat', {
+  opacity: 0, x: -70, duration: 1.0, ease: 'power2.out',
+  scrollTrigger: { trigger: '.noticias-grid', start: 'top 80%' }
+});
+gsap.from('#nStack .n-item', {
+  opacity: 0, x: 55, stagger: 0.11, duration: 0.72, ease: 'power2.out',
+  scrollTrigger: { trigger: '#nStack', start: 'top 82%' }
+});
+
+/* ── CTA: timeline encadenado ── */
+gsap.timeline({ scrollTrigger: { trigger: '#ctaS', start: 'top 72%' } })
+  .from('#ctaEye',  { opacity: 0, y: 20, duration: 0.5, ease: 'power2.out',
+                      onStart() { document.getElementById('ctaEye').classList.add('rev'); } })
+  .from('#ctaH2',   { opacity: 0, y: 70, scale: 0.91, duration: 1.2, ease: 'power3.out' }, '-=0.2')
+  .from('#ctaP',    { opacity: 0, y: 30, duration: 0.8, ease: 'power2.out' }, '-=0.7')
+  .from('#ctaBtns > *', { opacity: 0, y: 24, stagger: 0.14, duration: 0.65, ease: 'power2.out' }, '-=0.55');
+
+/* ── SPONSORS ── */
+gsap.from('#sponRow .spon-logo', {
+  opacity: 0, y: 22, stagger: 0.08, duration: 0.55, ease: 'power2.out',
+  scrollTrigger: { trigger: '.spon-s', start: 'top 88%' }
+});
+
+/* ── FOOTER ── */
+gsap.from('#fMain > *', {
+  opacity: 0, y: 38, stagger: 0.1, duration: 0.78, ease: 'power2.out',
+  scrollTrigger: { trigger: 'footer', start: 'top 90%' }
+});
+</script>
+</body>
+</html>
